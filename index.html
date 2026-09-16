@@ -1469,7 +1469,166 @@ tr:hover td {
 }
 
   
-  </style>
+  
+/* Theme Styles */
+body.theme-midnight {
+  --bg-base: #030712;
+  --bg-surface: #0b0f19;
+  --bg-card: rgba(17, 24, 39, 0.85);
+  --border-subtle: rgba(59, 130, 246, 0.15);
+}
+
+body.theme-light {
+  --bg-base: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --border-subtle: #e2e8f0;
+  --border-card: #cbd5e1;
+}
+
+body.theme-light .code-card {
+  background: #1e293b;
+}
+
+body.theme-light .app-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.theme-light .app-sidebar {
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+}
+
+/* Theme Switcher Button */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+/* Table Filter Bar */
+.table-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 10px 0;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+}
+
+.filter-pill {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-pill:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text-main);
+}
+
+.filter-pill.active {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: var(--accent-primary);
+  color: #c7d2fe;
+}
+
+/* LeetCode Problem Link Styling */
+.problem-link {
+  color: #93c5fd;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.problem-link:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.problem-link .ext-icon {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* Print Styles for Clean PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 12pt !important;
+  }
+  .app-sidebar, .app-header, .ambient-glow-1, .ambient-glow-2, 
+  .scroll-progress-container, .btn-sidebar-toggle, .back-to-top,
+  .hero-cta-buttons, .next-topic-card, .table-filter-bar, .copy-btn,
+  .sidebar-backdrop {
+    display: none !important;
+  }
+  .main-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .content-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .code-card {
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    page-break-inside: avoid;
+  }
+  .code-card pre code {
+    color: #0f172a !important;
+  }
+  .topic-header-banner, .milestone-card {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    page-break-inside: avoid;
+  }
+  table {
+    page-break-inside: avoid;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -1508,6 +1667,9 @@ tr:hover td {
     </div>
 
     <div class="header-right">
+      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch Theme (Obsidian / Midnight / Light)">
+        <span id="themeIcon">🌙</span>
+      </button>
       <div class="header-stat-pill">
         <span class="stat-pulse"></span>
         <span>75 / 75 Topics • 100% Full Roadmap 👑</span>
@@ -1596,7 +1758,7 @@ tr:hover td {
       <ul class="nav-list">
         <li><a href="#topic-6-arrays-mastery" class="nav-link"><span class="sec-num">T6</span> Topic 6: Arrays Mastery</a></li>
         <li><a href="#topic-7-strings-deep-dive" class="nav-link"><span class="sec-num">T7</span> Topic 7: Strings Deep Dive</a></li>
-        <li><a href="#topic-8-hashing--hash-tables" class="nav-link"><span class="sec-num">T8</span> Topic 8: Hashing & Maps</a></li>
+        <li><a href="#topic-8-hashing-hash-tables" class="nav-link"><span class="sec-num">T8</span> Topic 8: Hashing & Maps</a></li>
         <li><a href="#topic-9-two-pointers-technique" class="nav-link"><span class="sec-num">T9</span> Topic 9: Two Pointers</a></li>
         <li><a href="#topic-10-sliding-window-technique" class="nav-link"><span class="sec-num">T10</span> Topic 10: Sliding Window</a></li>
         <li><a href="#topic-11-prefix-sum-pattern" class="nav-link"><span class="sec-num">T11</span> Topic 11: Prefix Sum</a></li>
@@ -1604,7 +1766,7 @@ tr:hover td {
         <li><a href="#topic-13-binary-search" class="nav-link"><span class="sec-num">T13</span> Topic 13: Binary Search</a></li>
         <li><a href="#topic-14-binary-search-on-answer" class="nav-link"><span class="sec-num">T14</span> Topic 14: BS on Answer</a></li>
         <li><a href="#topic-15-linked-lists" class="nav-link"><span class="sec-num">T15</span> Topic 15: Linked Lists</a></li>
-        <li><a href="#topic-16-stacks--queues" class="nav-link"><span class="sec-num">T16</span> Topic 16: Stacks & Queues</a></li>
+        <li><a href="#topic-16-stacks-queues" class="nav-link"><span class="sec-num">T16</span> Topic 16: Stacks & Queues</a></li>
       </ul>
     </div>
 
@@ -1615,10 +1777,10 @@ tr:hover td {
         <span>PHASE 3: RECURSION & BT (T17–T20)</span>
       </div>
       <ul class="nav-list">
-        <li><a href="#topic-17-recursion-advanced--state-trees" class="nav-link"><span class="sec-num">T17</span> Topic 17: State Trees</a></li>
+        <li><a href="#topic-17-recursion-advanced-state-trees" class="nav-link"><span class="sec-num">T17</span> Topic 17: State Trees</a></li>
         <li><a href="#topic-18-backtracking-foundations" class="nav-link"><span class="sec-num">T18</span> Topic 18: Backtracking</a></li>
-        <li><a href="#topic-19-permutations--grid-backtracking" class="nav-link"><span class="sec-num">T19</span> Topic 19: Permutations</a></li>
-        <li><a href="#topic-20-hard-backtracking--constraint-satisfaction" class="nav-link"><span class="sec-num">T20</span> Topic 20: Hard Backtrack</a></li>
+        <li><a href="#topic-19-permutations-grid-backtracking" class="nav-link"><span class="sec-num">T19</span> Topic 19: Permutations</a></li>
+        <li><a href="#topic-20-hard-backtracking-constraint-satisfaction" class="nav-link"><span class="sec-num">T20</span> Topic 20: Hard Backtrack</a></li>
       </ul>
     </div>
 
@@ -1630,12 +1792,12 @@ tr:hover td {
       </div>
       <ul class="nav-list">
         <li><a href="#topic-21-binary-trees-fundamentals" class="nav-link"><span class="sec-num">T21</span> Topic 21: Binary Trees</a></li>
-        <li><a href="#topic-22-tree-traversals-dfs--bfs" class="nav-link"><span class="sec-num">T22</span> Topic 22: Tree Traversals</a></li>
-        <li><a href="#topic-23-tree-construction-views--lca" class="nav-link"><span class="sec-num">T23</span> Topic 23: Views & LCA</a></li>
+        <li><a href="#topic-22-tree-traversals-dfs-bfs" class="nav-link"><span class="sec-num">T22</span> Topic 22: Tree Traversals</a></li>
+        <li><a href="#topic-23-tree-construction-views-lca" class="nav-link"><span class="sec-num">T23</span> Topic 23: Views & LCA</a></li>
         <li><a href="#topic-24-binary-search-tree-bst-fundamentals" class="nav-link"><span class="sec-num">T24</span> Topic 24: BST Fundamentals</a></li>
-        <li><a href="#topic-25-bst-conversions--optimization" class="nav-link"><span class="sec-num">T25</span> Topic 25: BST Conversions</a></li>
-        <li><a href="#topic-26-heap-fundamentals--heapify" class="nav-link"><span class="sec-num">T26</span> Topic 26: Heap Fundamentals</a></li>
-        <li><a href="#topic-27-priority-queue--top-k-patterns" class="nav-link"><span class="sec-num">T27</span> Topic 27: Priority Queue</a></li>
+        <li><a href="#topic-25-bst-conversions-optimization" class="nav-link"><span class="sec-num">T25</span> Topic 25: BST Conversions</a></li>
+        <li><a href="#topic-26-heap-fundamentals-heapify" class="nav-link"><span class="sec-num">T26</span> Topic 26: Heap Fundamentals</a></li>
+        <li><a href="#topic-27-priority-queue-top-k-patterns" class="nav-link"><span class="sec-num">T27</span> Topic 27: Priority Queue</a></li>
         <li><a href="#topic-28-prefix-tree-trie" class="nav-link"><span class="sec-num">T28</span> Topic 28: Prefix Tree (Trie)</a></li>
       </ul>
     </div>
@@ -1648,12 +1810,12 @@ tr:hover td {
       </div>
       <ul class="nav-list">
         <li><a href="#topic-29-graph-representations" class="nav-link"><span class="sec-num">T29</span> Topic 29: Graph Representations</a></li>
-        <li><a href="#topic-30-graph-traversals-bfs--dfs" class="nav-link"><span class="sec-num">T30</span> Topic 30: BFS & DFS</a></li>
+        <li><a href="#topic-30-graph-traversals-bfs-dfs" class="nav-link"><span class="sec-num">T30</span> Topic 30: BFS & DFS</a></li>
         <li><a href="#topic-31-cycle-detection-in-graphs" class="nav-link"><span class="sec-num">T31</span> Topic 31: Cycle Detection</a></li>
-        <li><a href="#topic-32-topological-sort--dags" class="nav-link"><span class="sec-num">T32</span> Topic 32: Topo Sort (Kahn)</a></li>
+        <li><a href="#topic-32-topological-sort-dags" class="nav-link"><span class="sec-num">T32</span> Topic 32: Topo Sort (Kahn)</a></li>
         <li><a href="#topic-33-shortest-path-in-unweighted-graphs" class="nav-link"><span class="sec-num">T33</span> Topic 33: Unweighted Shortest</a></li>
         <li><a href="#topic-34-dijkstras-algorithm" class="nav-link"><span class="sec-num">T34</span> Topic 34: Dijkstra's Algo</a></li>
-        <li><a href="#topic-35-bellman-ford--negative-cycles" class="nav-link"><span class="sec-num">T35</span> Topic 35: Bellman-Ford</a></li>
+        <li><a href="#topic-35-bellman-ford-negative-cycles" class="nav-link"><span class="sec-num">T35</span> Topic 35: Bellman-Ford</a></li>
         <li><a href="#topic-36-floyd-warshall-algorithm" class="nav-link"><span class="sec-num">T36</span> Topic 36: Floyd-Warshall</a></li>
         <li><a href="#topic-37-minimum-spanning-tree-mst" class="nav-link"><span class="sec-num">T37</span> Topic 37: MST (Kruskal/Prim)</a></li>
         <li><a href="#topic-38-disjoint-set-union-union-find" class="nav-link"><span class="sec-num">T38</span> Topic 38: Union-Find (DSU)</a></li>
@@ -1667,12 +1829,12 @@ tr:hover td {
         <span>PHASE 6: GREEDY (T39–T44)</span>
       </div>
       <ul class="nav-list">
-        <li><a href="#topic-39-greedy-fundamentals--choice-property" class="nav-link"><span class="sec-num">T39</span> Topic 39: Greedy vs DP</a></li>
-        <li><a href="#topic-40-interval-scheduling--overlaps" class="nav-link"><span class="sec-num">T40</span> Topic 40: Meeting Rooms II</a></li>
-        <li><a href="#topic-41-interval-merging--non-overlapping" class="nav-link"><span class="sec-num">T41</span> Topic 41: Merge Intervals</a></li>
+        <li><a href="#topic-39-greedy-fundamentals-choice-property" class="nav-link"><span class="sec-num">T39</span> Topic 39: Greedy vs DP</a></li>
+        <li><a href="#topic-40-interval-scheduling-overlaps" class="nav-link"><span class="sec-num">T40</span> Topic 40: Meeting Rooms II</a></li>
+        <li><a href="#topic-41-interval-merging-non-overlapping" class="nav-link"><span class="sec-num">T41</span> Topic 41: Merge Intervals</a></li>
         <li><a href="#topic-42-jump-game-series" class="nav-link"><span class="sec-num">T42</span> Topic 42: Jump Game I & II</a></li>
-        <li><a href="#topic-43-circular-routing--gas-station" class="nav-link"><span class="sec-num">T43</span> Topic 43: Gas Station & Candy</a></li>
-        <li><a href="#topic-44-partitioning--scheduling" class="nav-link"><span class="sec-num">T44</span> Topic 44: Partition Labels</a></li>
+        <li><a href="#topic-43-circular-routing-gas-station" class="nav-link"><span class="sec-num">T43</span> Topic 43: Gas Station & Candy</a></li>
+        <li><a href="#topic-44-partitioning-scheduling" class="nav-link"><span class="sec-num">T44</span> Topic 44: Partition Labels</a></li>
       </ul>
     </div>
 
@@ -1688,12 +1850,12 @@ tr:hover td {
         <li><a href="#topic-47-2d-grid-dynamic-programming" class="nav-link"><span class="sec-num">T47</span> Topic 47: 2D Grid DP</a></li>
         <li><a href="#topic-48-01-knapsack-pattern" class="nav-link"><span class="sec-num">T48</span> Topic 48: 0/1 Knapsack</a></li>
         <li><a href="#topic-49-unbounded-knapsack-pattern" class="nav-link"><span class="sec-num">T49</span> Topic 49: Unbounded (Coin)</a></li>
-        <li><a href="#topic-50-longest-common-subsequence-lcs-pattern" class="nav-link"><span class="sec-num">T50</span> Topic 50: LCS Pattern</a></li>
+        <li><a href="#topic-50-longest-common-subsequence-lcs" class="nav-link"><span class="sec-num">T50</span> Topic 50: LCS Pattern</a></li>
         <li><a href="#topic-51-string-edit-distance-pattern" class="nav-link"><span class="sec-num">T51</span> Topic 51: Edit Distance</a></li>
-        <li><a href="#topic-52-longest-increasing-subsequence-lis-pattern" class="nav-link"><span class="sec-num">T52</span> Topic 52: LIS (O(N log N))</a></li>
+        <li><a href="#topic-52-longest-increasing-subsequence-lis" class="nav-link"><span class="sec-num">T52</span> Topic 52: LIS (O(N log N))</a></li>
         <li><a href="#topic-53-palindromic-dp-pattern" class="nav-link"><span class="sec-num">T53</span> Topic 53: Palindromic DP</a></li>
-        <li><a href="#topic-54-best-time-to-buy-and-sell-stock-masterclass" class="nav-link"><span class="sec-num">T54</span> Topic 54: Stock Series</a></li>
-        <li><a href="#topic-55-matrix-chain-multiplication-mcm--interval-dp" class="nav-link"><span class="sec-num">T55</span> Topic 55: MCM / Balloons</a></li>
+        <li><a href="#topic-54-best-time-to-buy-and-sell-stock-series" class="nav-link"><span class="sec-num">T54</span> Topic 54: Stock Series</a></li>
+        <li><a href="#topic-55-matrix-chain-multiplication-mcm" class="nav-link"><span class="sec-num">T55</span> Topic 55: MCM / Balloons</a></li>
         <li><a href="#topic-56-dp-on-trees" class="nav-link"><span class="sec-num">T56</span> Topic 56: Tree DP (Robber III)</a></li>
         <li><a href="#topic-57-bitmask-dynamic-programming" class="nav-link"><span class="sec-num">T57</span> Topic 57: Bitmask DP</a></li>
         <li><a href="#topic-58-digit-dynamic-programming" class="nav-link"><span class="sec-num">T58</span> Topic 58: Digit DP</a></li>
@@ -1744,7 +1906,7 @@ tr:hover td {
         <span>TRACKERS & MILESTONES</span>
       </div>
       <ul class="nav-list">
-        <li><a href="#phase-1-problem-tracking" class="nav-link"><span class="nav-dot"></span>Phase 1 Tracker (20 Prob)</a></li>
+        <li><a href="#phase-1-master-problem-tracker-20-curated-problems" class="nav-link"><span class="nav-dot"></span>Phase 1 Tracker (20 Prob)</a></li>
         <li><a href="#phase-2-master-problem-tracker-30-curated-problems" class="nav-link"><span class="nav-dot"></span>Phase 2 Tracker (30 Prob)</a></li>
         <li><a href="#phase-3-master-problem-tracker-15-curated-problems" class="nav-link"><span class="nav-dot"></span>Phase 3 Tracker (15 Prob)</a></li>
         <li><a href="#phase-4-master-problem-tracker-25-curated-problems" class="nav-link"><span class="nav-dot"></span>Phase 4 Tracker (25 Prob)</a></li>
@@ -5097,91 +5259,91 @@ const result = [1, 2, 3, 4, 5]
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>Contains Duplicate (#217)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Contains+Duplicate" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Contains Duplicate on LeetCode">Contains Duplicate (#217) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Set</td>
 <td>Hash Set</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Two Sum (#1)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Two+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Two Sum on LeetCode">Two Sum (#1) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Hash Map</td>
 <td>Complement</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Valid Anagram (#242)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Anagram" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Anagram on LeetCode">Valid Anagram (#242) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Frequency Map</td>
 <td>Char count</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Reverse String (#344)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+String" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse String on LeetCode">Reverse String (#344) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Two Pointers</td>
 <td>Array mutation</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Concatenation of Array (#1929)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Concatenation+of+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Concatenation of Array on LeetCode">Concatenation of Array (#1929) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Array</td>
 <td>Spread</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Running Sum of 1d Array (#1480)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Running+Sum+of+1d+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Running Sum of 1d Array on LeetCode">Running Sum of 1d Array (#1480) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Prefix Sum</td>
 <td>Cumulative</td>
 </tr>
 <tr>
 <td>7</td>
-<td>Merge Two Sorted Lists (#21)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+Two+Sorted+Lists" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge Two Sorted Lists on LeetCode">Merge Two Sorted Lists (#21) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Two Pointers</td>
 <td>Comparison</td>
 </tr>
 <tr>
 <td>8</td>
-<td>Longest Common Prefix (#14)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Common+Prefix" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Common Prefix on LeetCode">Longest Common Prefix (#14) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>String</td>
 <td>Iteration</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Find All Duplicates (#442)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Find+All+Duplicates" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Find All Duplicates on LeetCode">Find All Duplicates (#442) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Hash Set</td>
 <td>Marking</td>
 </tr>
 <tr>
 <td>10</td>
-<td>Group Anagrams (#49)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Group+Anagrams" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Group Anagrams on LeetCode">Group Anagrams (#49) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Hash Map</td>
 <td>Sorted key</td>
 </tr>
 <tr>
 <td>11</td>
-<td>Longest Substring Without Repeating (#3)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Substring+Without+Repeating" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Substring Without Repeating on LeetCode">Longest Substring Without Repeating (#3) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Sliding Window</td>
 <td>Map</td>
 </tr>
 <tr>
 <td>12</td>
-<td>Top K Frequent Elements (#347)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Top+K+Frequent+Elements" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Top K Frequent Elements on LeetCode">Top K Frequent Elements (#347) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Hash Map + Sort</td>
 <td>Frequency</td>
 </tr>
 <tr>
 <td>13</td>
-<td>Product of Array Except Self (#238)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Product+of+Array+Except+Self" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Product of Array Except Self on LeetCode">Product of Array Except Self (#238) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Prefix Product</td>
 <td>No division</td>
@@ -5459,7 +5621,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>Contains Duplicate (#217)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Contains+Duplicate" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Contains Duplicate on LeetCode">Contains Duplicate (#217) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Set</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_10" data-id="dsa_p1_10" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5469,7 +5631,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>2</td>
-<td>Two Sum (#1)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Two+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Two Sum on LeetCode">Two Sum (#1) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>HashMap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_14" data-id="dsa_p1_14" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5479,7 +5641,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>3</td>
-<td>Valid Anagram (#242)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Anagram" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Anagram on LeetCode">Valid Anagram (#242) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Freq Map</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_18" data-id="dsa_p1_18" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5489,7 +5651,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>4</td>
-<td>Reverse String (#344)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+String" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse String on LeetCode">Reverse String (#344) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Array</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_22" data-id="dsa_p1_22" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5499,7 +5661,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>5</td>
-<td>Palindrome Number (#9)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Palindrome+Number" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Palindrome Number on LeetCode">Palindrome Number (#9) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>String/Math</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_26" data-id="dsa_p1_26" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5509,7 +5671,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>6</td>
-<td>Group Anagrams (#49)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Group+Anagrams" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Group Anagrams on LeetCode">Group Anagrams (#49) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>HashMap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_30" data-id="dsa_p1_30" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5519,7 +5681,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>7</td>
-<td>Top K Frequent (#347)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Top+K+Frequent" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Top K Frequent on LeetCode">Top K Frequent (#347) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Freq + Sort</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_34" data-id="dsa_p1_34" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -5529,7 +5691,7 @@ QUEUE:  array.push() / head pointer OR LinkedList
 </tr>
 <tr>
 <td>8</td>
-<td>Product Except Self (#238)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Product+Except+Self" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Product Except Self on LeetCode">Product Except Self (#238) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Prefix</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_38" data-id="dsa_p1_38" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7265,6 +7427,15 @@ return search(node.left, val) || search(node.right, val);
 </blockquote>
 <hr>
 <h2 id="phase-1-master-problem-tracker-20-curated-problems" class="heading-anchor"><a href="#phase-1-master-problem-tracker-20-curated-problems" class="anchor-link">#</a>🔁 Phase 1 Master Problem Tracker (20 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
+
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -7282,7 +7453,7 @@ return search(node.left, val) || search(node.right, val);
 <tbody><tr>
 <td>1</td>
 <td>JS for DSA</td>
-<td>Contains Duplicate (#217)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Contains+Duplicate" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Contains Duplicate on LeetCode">Contains Duplicate (#217) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Set</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_42" data-id="dsa_p1_42" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7293,7 +7464,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>2</td>
 <td>JS for DSA</td>
-<td>Two Sum (#1)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Two+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Two Sum on LeetCode">Two Sum (#1) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>HashMap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_46" data-id="dsa_p1_46" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7304,7 +7475,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>3</td>
 <td>JS for DSA</td>
-<td>Valid Anagram (#242)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Anagram" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Anagram on LeetCode">Valid Anagram (#242) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Freq Map</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_50" data-id="dsa_p1_50" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7315,7 +7486,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>4</td>
 <td>JS for DSA</td>
-<td>Reverse String (#344)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+String" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse String on LeetCode">Reverse String (#344) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Two Pointers</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_54" data-id="dsa_p1_54" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7326,7 +7497,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>5</td>
 <td>JS for DSA</td>
-<td>Palindrome Number (#9)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Palindrome+Number" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Palindrome Number on LeetCode">Palindrome Number (#9) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Math / String</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_58" data-id="dsa_p1_58" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7337,7 +7508,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>6</td>
 <td>JS for DSA</td>
-<td>Group Anagrams (#49)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Group+Anagrams" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Group Anagrams on LeetCode">Group Anagrams (#49) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>HashMap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_62" data-id="dsa_p1_62" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7348,7 +7519,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>7</td>
 <td>JS for DSA</td>
-<td>Top K Frequent (#347)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Top+K+Frequent" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Top K Frequent on LeetCode">Top K Frequent (#347) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Bucket Sort</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_66" data-id="dsa_p1_66" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7359,7 +7530,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>8</td>
 <td>JS for DSA</td>
-<td>Product Except Self (#238)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Product+Except+Self" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Product Except Self on LeetCode">Product Except Self (#238) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Prefix Sum</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_70" data-id="dsa_p1_70" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7370,7 +7541,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>9</td>
 <td>Complexity</td>
-<td>Maximum Subarray (#53)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Maximum+Subarray" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Maximum Subarray on LeetCode">Maximum Subarray (#53) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Kadane O(N)</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_74" data-id="dsa_p1_74" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7381,7 +7552,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>10</td>
 <td>Complexity</td>
-<td>Rotated Sorted Array (#33)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Rotated+Sorted+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Rotated Sorted Array on LeetCode">Rotated Sorted Array (#33) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Binary Search</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_78" data-id="dsa_p1_78" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7392,7 +7563,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>11</td>
 <td>Math</td>
-<td>Reverse Integer (#7)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+Integer" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse Integer on LeetCode">Reverse Integer (#7) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>32-bit Overflow</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_82" data-id="dsa_p1_82" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7414,7 +7585,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>13</td>
 <td>Math</td>
-<td>Count Primes (#204)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Count+Primes" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Count Primes on LeetCode">Count Primes (#204) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Sieve</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_90" data-id="dsa_p1_90" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7425,7 +7596,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>14</td>
 <td>Math</td>
-<td>GCD of Strings (#1071)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=GCD+of+Strings" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open GCD of Strings on LeetCode">GCD of Strings (#1071) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Euclidean GCD</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_94" data-id="dsa_p1_94" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7436,7 +7607,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>15</td>
 <td>Recursion</td>
-<td>Fibonacci Number (#509)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Fibonacci+Number" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Fibonacci Number on LeetCode">Fibonacci Number (#509) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Tree Recursion</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_98" data-id="dsa_p1_98" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7447,7 +7618,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>16</td>
 <td>Recursion</td>
-<td>Power of Two (#231)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Power+of+Two" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Power of Two on LeetCode">Power of Two (#231) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Base Case</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_102" data-id="dsa_p1_102" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7458,7 +7629,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>17</td>
 <td>Recursion</td>
-<td>Reverse String Recursive (#344)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+String+Recursive" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse String Recursive on LeetCode">Reverse String Recursive (#344) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>In-place Swap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_106" data-id="dsa_p1_106" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7469,7 +7640,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>18</td>
 <td>Recursion</td>
-<td>Subsets (#78)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Subsets" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Subsets on LeetCode">Subsets (#78) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Backtracking</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_110" data-id="dsa_p1_110" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7480,7 +7651,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>19</td>
 <td>Recursion</td>
-<td>Merge Two Sorted Lists (#21)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+Two+Sorted+Lists" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge Two Sorted Lists on LeetCode">Merge Two Sorted Lists (#21) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Recursive Link</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_114" data-id="dsa_p1_114" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7491,7 +7662,7 @@ return search(node.left, val) || search(node.right, val);
 <tr>
 <td>20</td>
 <td>Recursion</td>
-<td>Climbing Stairs (#70)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Climbing+Stairs" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Climbing Stairs on LeetCode">Climbing Stairs (#70) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Sub-problem Tree</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p1_118" data-id="dsa_p1_118" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -7518,6 +7689,14 @@ return search(node.left, val) || search(node.right, val);
 </div>
 
 <h2 id="1-what-is-it" class="heading-anchor"><a href="#1-what-is-it" class="anchor-link">#</a>1. What is it?</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <p><strong>Array memory mein contiguous (ek ke baad ek) blocks of memory mein store hone wala linear data structure hai.</strong></p>
 <ul>
 <li>Index-based access $O(1)$ time mein hota hai kyunki formula direct memory address nikalta hai:
@@ -7865,7 +8044,7 @@ $$currentSum = \max(num, currentSum + num)$$</p>
 
 <hr>
 
-<div class="topic-header-banner" id="topic-8-hashing-&-hash-tables">
+<div class="topic-header-banner" id="topic-8-hashing-hash-tables">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 2: Linear DS</span>
     <span class="tag tag-number">Topic #08</span>
@@ -9038,7 +9217,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 
 <hr>
 
-<div class="topic-header-banner" id="topic-16-stacks-&-queues">
+<div class="topic-header-banner" id="topic-16-stacks-queues">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 2: Linear DS</span>
     <span class="tag tag-number">Topic #16</span>
@@ -9218,6 +9397,14 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 </blockquote>
 <hr>
 <h2 id="phase-2-master-problem-tracker-30-curated-problems" class="heading-anchor"><a href="#phase-2-master-problem-tracker-30-curated-problems" class="anchor-link">#</a>🔁 Phase 2 Master Problem Tracker (30 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -9235,7 +9422,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tbody><tr>
 <td>21</td>
 <td>Arrays</td>
-<td>Maximum Subarray (#53)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Maximum+Subarray" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Maximum Subarray on LeetCode">Maximum Subarray (#53) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Kadane</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_1" data-id="dsa_p2_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9246,7 +9433,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>22</td>
 <td>Arrays</td>
-<td>Sort Colors (#75)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Sort+Colors" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Sort Colors on LeetCode">Sort Colors (#75) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Dutch Flag</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_5" data-id="dsa_p2_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9257,7 +9444,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>23</td>
 <td>Arrays</td>
-<td>Rotate Array (#189)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Rotate+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Rotate Array on LeetCode">Rotate Array (#189) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Reversal Trick</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_9" data-id="dsa_p2_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9268,7 +9455,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>24</td>
 <td>Strings</td>
-<td>Longest Palindrome Substring (#5)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Palindrome+Substring" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Palindrome Substring on LeetCode">Longest Palindrome Substring (#5) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Expand Center</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_13" data-id="dsa_p2_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9279,7 +9466,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>25</td>
 <td>Strings</td>
-<td>String Compression (#443)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=String+Compression" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open String Compression on LeetCode">String Compression (#443) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Two Pointers</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_17" data-id="dsa_p2_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9290,7 +9477,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>26</td>
 <td>Hashing</td>
-<td>Two Sum (#1)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Two+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Two Sum on LeetCode">Two Sum (#1) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Hash Map</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_21" data-id="dsa_p2_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9301,7 +9488,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>27</td>
 <td>Hashing</td>
-<td>Group Anagrams (#49)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Group+Anagrams" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Group Anagrams on LeetCode">Group Anagrams (#49) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Frequency Hash</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_25" data-id="dsa_p2_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9312,7 +9499,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>28</td>
 <td>Hashing</td>
-<td>Longest Consecutive Sequence (#128)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Consecutive+Sequence" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Consecutive Sequence on LeetCode">Longest Consecutive Sequence (#128) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Hash Set</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_29" data-id="dsa_p2_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9323,7 +9510,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>29</td>
 <td>Two Pointers</td>
-<td>3Sum (#15)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=3Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open 3Sum on LeetCode">3Sum (#15) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Two Pointers</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_33" data-id="dsa_p2_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9334,7 +9521,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>30</td>
 <td>Two Pointers</td>
-<td>Container With Most Water (#11)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Container+With+Most+Water" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Container With Most Water on LeetCode">Container With Most Water (#11) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Greedy Shrink</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_37" data-id="dsa_p2_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9345,7 +9532,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>31</td>
 <td>Two Pointers</td>
-<td>Trapping Rain Water (#42)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Trapping+Rain+Water" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Trapping Rain Water on LeetCode">Trapping Rain Water (#42) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Left/Right Max</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_41" data-id="dsa_p2_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9356,7 +9543,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>32</td>
 <td>Sliding Window</td>
-<td>Longest Substring No Repeat (#3)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Substring+No+Repeat" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Substring No Repeat on LeetCode">Longest Substring No Repeat (#3) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Dynamic Window</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_45" data-id="dsa_p2_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9367,7 +9554,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>33</td>
 <td>Sliding Window</td>
-<td>Minimum Window Substring (#76)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Minimum+Window+Substring" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Minimum Window Substring on LeetCode">Minimum Window Substring (#76) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Freq Map Window</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_49" data-id="dsa_p2_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9378,7 +9565,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>34</td>
 <td>Prefix Sum</td>
-<td>Subarray Sum Equals K (#560)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Subarray+Sum+Equals+K" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Subarray Sum Equals K on LeetCode">Subarray Sum Equals K (#560) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Prefix + Map</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_53" data-id="dsa_p2_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9389,7 +9576,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>35</td>
 <td>Prefix Sum</td>
-<td>Product Except Self (#238)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Product+Except+Self" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Product Except Self on LeetCode">Product Except Self (#238) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Prefix &amp; Suffix</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_57" data-id="dsa_p2_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9400,7 +9587,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>36</td>
 <td>Sorting</td>
-<td>Merge Intervals (#56)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+Intervals" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge Intervals on LeetCode">Merge Intervals (#56) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Sort &amp; Merge</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_61" data-id="dsa_p2_61" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9411,7 +9598,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>37</td>
 <td>Sorting</td>
-<td>Top K Frequent Elements (#347)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Top+K+Frequent+Elements" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Top K Frequent Elements on LeetCode">Top K Frequent Elements (#347) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Bucket Sort</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_65" data-id="dsa_p2_65" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9422,7 +9609,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>38</td>
 <td>Binary Search</td>
-<td>Search in Rotated Array (#33)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Search+in+Rotated+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Search in Rotated Array on LeetCode">Search in Rotated Array (#33) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Modified BS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_69" data-id="dsa_p2_69" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9433,7 +9620,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>39</td>
 <td>Binary Search</td>
-<td>Find Peak Element (#162)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Find+Peak+Element" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Find Peak Element on LeetCode">Find Peak Element (#162) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Slope BS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_73" data-id="dsa_p2_73" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9444,7 +9631,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>40</td>
 <td>BS on Answer</td>
-<td>Koko Eating Bananas (#875)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Koko+Eating+Bananas" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Koko Eating Bananas on LeetCode">Koko Eating Bananas (#875) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Monotonic BS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_77" data-id="dsa_p2_77" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9455,7 +9642,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>41</td>
 <td>BS on Answer</td>
-<td>Capacity to Ship Packages (#1011)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Capacity+to+Ship+Packages" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Capacity to Ship Packages on LeetCode">Capacity to Ship Packages (#1011) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Monotonic BS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_81" data-id="dsa_p2_81" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9466,7 +9653,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>42</td>
 <td>Linked List</td>
-<td>Reverse Linked List (#206)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+Linked+List" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse Linked List on LeetCode">Reverse Linked List (#206) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Pointer Swap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_85" data-id="dsa_p2_85" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9477,7 +9664,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>43</td>
 <td>Linked List</td>
-<td>Linked List Cycle (#141)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Linked+List+Cycle" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Linked List Cycle on LeetCode">Linked List Cycle (#141) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Fast &amp; Slow</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_89" data-id="dsa_p2_89" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9488,7 +9675,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>44</td>
 <td>Linked List</td>
-<td>Merge Two Sorted Lists (#21)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+Two+Sorted+Lists" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge Two Sorted Lists on LeetCode">Merge Two Sorted Lists (#21) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Dummy Head</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_93" data-id="dsa_p2_93" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9499,7 +9686,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>45</td>
 <td>Linked List</td>
-<td>Remove Nth Node From End (#19)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Remove+Nth+Node+From+End" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Remove Nth Node From End on LeetCode">Remove Nth Node From End (#19) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Two Pointers</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_97" data-id="dsa_p2_97" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9510,7 +9697,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>46</td>
 <td>Stack</td>
-<td>Valid Parentheses (#20)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Parentheses" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Parentheses on LeetCode">Valid Parentheses (#20) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Bracket Stack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_101" data-id="dsa_p2_101" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9521,7 +9708,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>47</td>
 <td>Stack</td>
-<td>Min Stack (#155)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Min+Stack" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Min Stack on LeetCode">Min Stack (#155) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Auxiliary Min</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_105" data-id="dsa_p2_105" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9532,7 +9719,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>48</td>
 <td>Stack</td>
-<td>Daily Temperatures (#739)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Daily+Temperatures" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Daily Temperatures on LeetCode">Daily Temperatures (#739) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Monotonic Stack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_109" data-id="dsa_p2_109" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9543,7 +9730,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>49</td>
 <td>Stack</td>
-<td>Next Greater Element I (#496)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Next+Greater+Element+I" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Next Greater Element I on LeetCode">Next Greater Element I (#496) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Monotonic Stack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_113" data-id="dsa_p2_113" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9554,7 +9741,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>50</td>
 <td>Queue</td>
-<td>Implement Queue using Stacks (#232)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Implement+Queue+using+Stacks" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Implement Queue using Stacks on LeetCode">Implement Queue using Stacks (#232) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Two Stacks FIFO</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p2_117" data-id="dsa_p2_117" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -9566,7 +9753,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <hr>
 
 
-<div class="topic-header-banner" id="topic-17-recursion-advanced-&-state-trees">
+<div class="topic-header-banner" id="topic-17-recursion-advanced-state-trees">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 3: Recursion & BT</span>
     <span class="tag tag-number">Topic #17</span>
@@ -9826,7 +10013,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 
 <hr>
 
-<div class="topic-header-banner" id="topic-19-permutations-&-grid-backtracking">
+<div class="topic-header-banner" id="topic-19-permutations-grid-backtracking">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 3: Recursion & BT</span>
     <span class="tag tag-number">Topic #19</span>
@@ -10011,7 +10198,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 
 <hr>
 
-<div class="topic-header-banner" id="topic-20-hard-backtracking-&-constraint-satisfaction">
+<div class="topic-header-banner" id="topic-20-hard-backtracking-constraint-satisfaction">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 3: Recursion & BT</span>
     <span class="tag tag-number">Topic #20</span>
@@ -10185,6 +10372,14 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 </blockquote>
 <hr>
 <h2 id="phase-3-master-problem-tracker-15-curated-problems" class="heading-anchor"><a href="#phase-3-master-problem-tracker-15-curated-problems" class="anchor-link">#</a>🔁 Phase 3 Master Problem Tracker (15 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -10202,7 +10397,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tbody><tr>
 <td>51</td>
 <td>Recursion Tree</td>
-<td>Subsets (#78)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Subsets" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Subsets on LeetCode">Subsets (#78) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Pick / Don&#39;t Pick</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_1" data-id="dsa_p3_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10213,7 +10408,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>52</td>
 <td>Backtracking</td>
-<td>Subsets II (#90)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Subsets+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Subsets II on LeetCode">Subsets II (#90) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Duplicate Pruning</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_5" data-id="dsa_p3_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10224,7 +10419,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>53</td>
 <td>Backtracking</td>
-<td>Combination Sum (#39)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Combination+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Combination Sum on LeetCode">Combination Sum (#39) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Unlimited Pick</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_9" data-id="dsa_p3_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10235,7 +10430,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>54</td>
 <td>Backtracking</td>
-<td>Combination Sum II (#40)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Combination+Sum+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Combination Sum II on LeetCode">Combination Sum II (#40) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Single Use / Dups</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_13" data-id="dsa_p3_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10246,7 +10441,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>55</td>
 <td>Backtracking</td>
-<td>Combinations (#77)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Combinations" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Combinations on LeetCode">Combinations (#77) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>K-Length Subsets</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_17" data-id="dsa_p3_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10257,7 +10452,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>56</td>
 <td>Backtracking</td>
-<td>Letter Combinations Phone (#17)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Letter+Combinations+Phone" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Letter Combinations Phone on LeetCode">Letter Combinations Phone (#17) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Mapping Tree</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_21" data-id="dsa_p3_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10268,7 +10463,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>57</td>
 <td>Permutations</td>
-<td>Permutations (#46)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Permutations" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Permutations on LeetCode">Permutations (#46) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Visited Array</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_25" data-id="dsa_p3_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10279,7 +10474,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>58</td>
 <td>Permutations</td>
-<td>Permutations II (#47)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Permutations+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Permutations II on LeetCode">Permutations II (#47) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Duplicate Sort</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_29" data-id="dsa_p3_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10290,7 +10485,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>59</td>
 <td>Partitioning</td>
-<td>Palindrome Partitioning (#131)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Palindrome+Partitioning" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Palindrome Partitioning on LeetCode">Palindrome Partitioning (#131) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Substring Palindrome</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_33" data-id="dsa_p3_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10301,7 +10496,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>60</td>
 <td>Grid Backtrack</td>
-<td>Word Search (#79)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Word+Search" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Word Search on LeetCode">Word Search (#79) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>2D DFS Masking</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_37" data-id="dsa_p3_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10312,7 +10507,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>61</td>
 <td>Grid Backtrack</td>
-<td>Word Search II (#212)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Word+Search+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Word Search II on LeetCode">Word Search II (#212) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Trie + Backtrack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_41" data-id="dsa_p3_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10323,7 +10518,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>62</td>
 <td>Hard Backtrack</td>
-<td>N-Queens (#51)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=N-Queens" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open N-Queens on LeetCode">N-Queens (#51) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Set Diagonal Hash</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_45" data-id="dsa_p3_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10334,7 +10529,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>63</td>
 <td>Hard Backtrack</td>
-<td>N-Queens II (#52)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=N-Queens+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open N-Queens II on LeetCode">N-Queens II (#52) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Total Solutions Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_49" data-id="dsa_p3_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10345,7 +10540,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>64</td>
 <td>Hard Backtrack</td>
-<td>Sudoku Solver (#37)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Sudoku+Solver" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Sudoku Solver on LeetCode">Sudoku Solver (#37) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>3x3 Grid Pruning</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_53" data-id="dsa_p3_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10356,7 +10551,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 <tr>
 <td>65</td>
 <td>Hard Backtrack</td>
-<td>Generate Parentheses (#22)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Generate+Parentheses" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Generate Parentheses on LeetCode">Generate Parentheses (#22) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Open &lt; Close Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p3_57" data-id="dsa_p3_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -10531,7 +10726,7 @@ Toh hum direct answer par Binary Search lagate hain!</p>
 
 <hr>
 
-<div class="topic-header-banner" id="topic-22-tree-traversals-(dfs-&-bfs)">
+<div class="topic-header-banner" id="topic-22-tree-traversals-dfs-bfs">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #22</span>
@@ -10664,7 +10859,7 @@ function postorderTraversal(root) {
 
 <hr>
 
-<div class="topic-header-banner" id="topic-23-tree-construction,-views-&-lca">
+<div class="topic-header-banner" id="topic-23-tree-construction-views-lca">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #23</span>
@@ -10761,7 +10956,7 @@ function postorderTraversal(root) {
 
 <hr>
 
-<div class="topic-header-banner" id="topic-24-binary-search-tree-(bst)-fundamentals">
+<div class="topic-header-banner" id="topic-24-binary-search-tree-bst-fundamentals">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #24</span>
@@ -10870,7 +11065,7 @@ $$\text{All nodes in Left Subtree} &lt; \text{Root Node} &lt; \text{All nodes in
 </div>
 
 
-<div class="topic-header-banner" id="topic-25-bst-conversions-&-optimization">
+<div class="topic-header-banner" id="topic-25-bst-conversions-optimization">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #25</span>
@@ -10966,7 +11161,7 @@ $$\text{All nodes in Left Subtree} &lt; \text{Root Node} &lt; \text{All nodes in
 
 <hr>
 
-<div class="topic-header-banner" id="topic-26-heap-fundamentals-&-heapify">
+<div class="topic-header-banner" id="topic-26-heap-fundamentals-heapify">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #26</span>
@@ -10994,7 +11189,7 @@ $$\text{All nodes in Left Subtree} &lt; \text{Root Node} &lt; \text{All nodes in
 </ul>
 <hr>
 
-<div class="topic-header-banner" id="topic-27-priority-queue-&-top-k-patterns">
+<div class="topic-header-banner" id="topic-27-priority-queue-top-k-patterns">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #27</span>
@@ -11133,7 +11328,7 @@ $$\text{All nodes in Left Subtree} &lt; \text{Root Node} &lt; \text{All nodes in
 
 <hr>
 
-<div class="topic-header-banner" id="topic-28-prefix-tree-(trie)">
+<div class="topic-header-banner" id="topic-28-prefix-tree-trie">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 4: Trees & Heaps</span>
     <span class="tag tag-number">Topic #28</span>
@@ -11244,6 +11439,14 @@ class Trie {
 </blockquote>
 <hr>
 <h2 id="phase-4-master-problem-tracker-25-curated-problems" class="heading-anchor"><a href="#phase-4-master-problem-tracker-25-curated-problems" class="anchor-link">#</a>🔁 Phase 4 Master Problem Tracker (25 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -11261,7 +11464,7 @@ class Trie {
 <tbody><tr>
 <td>66</td>
 <td>Binary Tree</td>
-<td>Maximum Depth (#104)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Maximum+Depth" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Maximum Depth on LeetCode">Maximum Depth (#104) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>DFS Height</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_1" data-id="dsa_p4_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11272,7 +11475,7 @@ class Trie {
 <tr>
 <td>67</td>
 <td>Binary Tree</td>
-<td>Invert Binary Tree (#226)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Invert+Binary+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Invert Binary Tree on LeetCode">Invert Binary Tree (#226) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Swap Children</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_5" data-id="dsa_p4_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11283,7 +11486,7 @@ class Trie {
 <tr>
 <td>68</td>
 <td>Binary Tree</td>
-<td>Diameter of Binary Tree (#543)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Diameter+of+Binary+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Diameter of Binary Tree on LeetCode">Diameter of Binary Tree (#543) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Post-order Max</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_9" data-id="dsa_p4_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11294,7 +11497,7 @@ class Trie {
 <tr>
 <td>69</td>
 <td>Binary Tree</td>
-<td>Balanced Binary Tree (#110)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Balanced+Binary+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Balanced Binary Tree on LeetCode">Balanced Binary Tree (#110) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Height Difference</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_13" data-id="dsa_p4_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11305,7 +11508,7 @@ class Trie {
 <tr>
 <td>70</td>
 <td>Binary Tree</td>
-<td>Same Tree (#100)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Same+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Same Tree on LeetCode">Same Tree (#100) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Dual Tree DFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_17" data-id="dsa_p4_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11316,7 +11519,7 @@ class Trie {
 <tr>
 <td>71</td>
 <td>Traversals</td>
-<td>Level Order Traversal (#102)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Level+Order+Traversal" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Level Order Traversal on LeetCode">Level Order Traversal (#102) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Queue BFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_21" data-id="dsa_p4_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11327,7 +11530,7 @@ class Trie {
 <tr>
 <td>72</td>
 <td>Traversals</td>
-<td>Zigzag Level Order (#103)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Zigzag+Level+Order" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Zigzag Level Order on LeetCode">Zigzag Level Order (#103) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>BFS Flag Reverse</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_25" data-id="dsa_p4_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11338,7 +11541,7 @@ class Trie {
 <tr>
 <td>73</td>
 <td>Views &amp; LCA</td>
-<td>Right Side View (#199)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Right+Side+View" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Right Side View on LeetCode">Right Side View (#199) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Level Last Element</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_29" data-id="dsa_p4_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11349,7 +11552,7 @@ class Trie {
 <tr>
 <td>74</td>
 <td>Views &amp; LCA</td>
-<td>Lowest Common Ancestor (#236)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Lowest+Common+Ancestor" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Lowest Common Ancestor on LeetCode">Lowest Common Ancestor (#236) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Subtree Split</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_33" data-id="dsa_p4_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11371,7 +11574,7 @@ class Trie {
 <tr>
 <td>76</td>
 <td>BST</td>
-<td>Validate Binary Search Tree (#98)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Validate+Binary+Search+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Validate Binary Search Tree on LeetCode">Validate Binary Search Tree (#98) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Min/Max Range</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_41" data-id="dsa_p4_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11382,7 +11585,7 @@ class Trie {
 <tr>
 <td>77</td>
 <td>BST</td>
-<td>Kth Smallest in BST (#230)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Kth+Smallest+in+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Kth Smallest in BST on LeetCode">Kth Smallest in BST (#230) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Inorder Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_45" data-id="dsa_p4_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11393,7 +11596,7 @@ class Trie {
 <tr>
 <td>78</td>
 <td>BST</td>
-<td>Search in a BST (#700)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Search+in+a+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Search in a BST on LeetCode">Search in a BST (#700) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Binary Branching</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_49" data-id="dsa_p4_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11404,7 +11607,7 @@ class Trie {
 <tr>
 <td>79</td>
 <td>BST</td>
-<td>Insert into a BST (#701)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Insert+into+a+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Insert into a BST on LeetCode">Insert into a BST (#701) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Leaf Placement</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_53" data-id="dsa_p4_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11415,7 +11618,7 @@ class Trie {
 <tr>
 <td>80</td>
 <td>BST</td>
-<td>Delete Node in a BST (#450)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Delete+Node+in+a+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Delete Node in a BST on LeetCode">Delete Node in a BST (#450) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Inorder Successor</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_57" data-id="dsa_p4_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11426,7 +11629,7 @@ class Trie {
 <tr>
 <td>81</td>
 <td>BST</td>
-<td>Sorted Array to BST (#108)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Sorted+Array+to+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Sorted Array to BST on LeetCode">Sorted Array to BST (#108) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Divide &amp; Conquer</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_61" data-id="dsa_p4_61" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11437,7 +11640,7 @@ class Trie {
 <tr>
 <td>82</td>
 <td>BST</td>
-<td>LCA of a BST (#235)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=LCA+of+a+BST" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open LCA of a BST on LeetCode">LCA of a BST (#235) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>BST Range Split</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_65" data-id="dsa_p4_65" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11448,7 +11651,7 @@ class Trie {
 <tr>
 <td>83</td>
 <td>Heap</td>
-<td>Kth Largest Element in Array (#215)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Kth+Largest+Element+in+Array" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Kth Largest Element in Array on LeetCode">Kth Largest Element in Array (#215) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>MinHeap Size K</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_69" data-id="dsa_p4_69" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11459,7 +11662,7 @@ class Trie {
 <tr>
 <td>84</td>
 <td>Heap</td>
-<td>Top K Frequent Elements (#347)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Top+K+Frequent+Elements" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Top K Frequent Elements on LeetCode">Top K Frequent Elements (#347) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Freq MinHeap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_73" data-id="dsa_p4_73" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11470,7 +11673,7 @@ class Trie {
 <tr>
 <td>85</td>
 <td>Heap</td>
-<td>Merge K Sorted Lists (#23)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+K+Sorted+Lists" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge K Sorted Lists on LeetCode">Merge K Sorted Lists (#23) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Node MinHeap</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_77" data-id="dsa_p4_77" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11481,7 +11684,7 @@ class Trie {
 <tr>
 <td>86</td>
 <td>Heap</td>
-<td>Find Median from Data Stream (#295)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Find+Median+from+Data+Stream" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Find Median from Data Stream on LeetCode">Find Median from Data Stream (#295) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Dual Balancing Heaps</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_81" data-id="dsa_p4_81" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11492,7 +11695,7 @@ class Trie {
 <tr>
 <td>87</td>
 <td>Trie</td>
-<td>Implement Trie (#208)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Implement+Trie" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Implement Trie on LeetCode">Implement Trie (#208) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>TrieNode Prefix</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_85" data-id="dsa_p4_85" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11503,7 +11706,7 @@ class Trie {
 <tr>
 <td>88</td>
 <td>Trie</td>
-<td>Design Add and Search Words (#211)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Design+Add+and+Search+Words" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Design Add and Search Words on LeetCode">Design Add and Search Words (#211) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Trie + DFS Wildcard</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_89" data-id="dsa_p4_89" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11514,7 +11717,7 @@ class Trie {
 <tr>
 <td>89</td>
 <td>Trie</td>
-<td>Word Search II (#212)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Word+Search+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Word Search II on LeetCode">Word Search II (#212) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Trie + 2D Backtrack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_93" data-id="dsa_p4_93" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11525,7 +11728,7 @@ class Trie {
 <tr>
 <td>90</td>
 <td>Tree Paths</td>
-<td>Binary Tree Maximum Path Sum (#124)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Binary+Tree+Maximum+Path+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Binary Tree Maximum Path Sum on LeetCode">Binary Tree Maximum Path Sum (#124) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Global Path Max</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p4_97" data-id="dsa_p4_97" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -11604,7 +11807,7 @@ class Graph {
 
 <hr>
 
-<div class="topic-header-banner" id="topic-30-graph-traversals-(bfs-&-dfs)">
+<div class="topic-header-banner" id="topic-30-graph-traversals-bfs-dfs">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #30</span>
@@ -11795,7 +11998,7 @@ class Graph {
 </ul>
 <hr>
 
-<div class="topic-header-banner" id="topic-32-topological-sort-&-dags">
+<div class="topic-header-banner" id="topic-32-topological-sort-dags">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #32</span>
@@ -11943,7 +12146,7 @@ class Graph {
 </div>
 
 
-<div class="topic-header-banner" id="topic-34-dijkstra's-algorithm">
+<div class="topic-header-banner" id="topic-34-dijkstras-algorithm">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #34</span>
@@ -12023,7 +12226,7 @@ class Graph {
 
 <hr>
 
-<div class="topic-header-banner" id="topic-35-bellman-ford-&-negative-cycles">
+<div class="topic-header-banner" id="topic-35-bellman-ford-negative-cycles">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #35</span>
@@ -12148,7 +12351,7 @@ class Graph {
 
 <hr>
 
-<div class="topic-header-banner" id="topic-37-minimum-spanning-tree-(mst)">
+<div class="topic-header-banner" id="topic-37-minimum-spanning-tree-mst">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #37</span>
@@ -12172,7 +12375,7 @@ class Graph {
 </ol>
 <hr>
 
-<div class="topic-header-banner" id="topic-38-disjoint-set-union-(union-find)">
+<div class="topic-header-banner" id="topic-38-disjoint-set-union-union-find">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 5: Graphs</span>
     <span class="tag tag-number">Topic #38</span>
@@ -12311,6 +12514,14 @@ class Graph {
 </blockquote>
 <hr>
 <h2 id="phase-5-master-problem-tracker-25-curated-problems" class="heading-anchor"><a href="#phase-5-master-problem-tracker-25-curated-problems" class="anchor-link">#</a>🔁 Phase 5 Master Problem Tracker (25 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -12328,7 +12539,7 @@ class Graph {
 <tbody><tr>
 <td>91</td>
 <td>Traversals</td>
-<td>Number of Islands (#200)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Number+of+Islands" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Number of Islands on LeetCode">Number of Islands (#200) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Grid DFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_1" data-id="dsa_p5_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12339,7 +12550,7 @@ class Graph {
 <tr>
 <td>92</td>
 <td>Traversals</td>
-<td>Max Area of Island (#695)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Max+Area+of+Island" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Max Area of Island on LeetCode">Max Area of Island (#695) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>DFS Area Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_5" data-id="dsa_p5_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12350,7 +12561,7 @@ class Graph {
 <tr>
 <td>93</td>
 <td>Traversals</td>
-<td>Clone Graph (#133)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Clone+Graph" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Clone Graph on LeetCode">Clone Graph (#133) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Hash Map + DFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_9" data-id="dsa_p5_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12361,7 +12572,7 @@ class Graph {
 <tr>
 <td>94</td>
 <td>Traversals</td>
-<td>Pacific Atlantic Water Flow (#417)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Pacific+Atlantic+Water+Flow" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Pacific Atlantic Water Flow on LeetCode">Pacific Atlantic Water Flow (#417) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Dual Ocean DFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_13" data-id="dsa_p5_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12372,7 +12583,7 @@ class Graph {
 <tr>
 <td>95</td>
 <td>Traversals</td>
-<td>Surrounded Regions (#130)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Surrounded+Regions" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Surrounded Regions on LeetCode">Surrounded Regions (#130) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Boundary DFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_17" data-id="dsa_p5_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12383,7 +12594,7 @@ class Graph {
 <tr>
 <td>96</td>
 <td>Cycle Detection</td>
-<td>Course Schedule (#207)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Course+Schedule" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Course Schedule on LeetCode">Course Schedule (#207) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Directed Cycle</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_21" data-id="dsa_p5_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12394,7 +12605,7 @@ class Graph {
 <tr>
 <td>97</td>
 <td>Cycle Detection</td>
-<td>Redundant Connection (#684)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Redundant+Connection" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Redundant Connection on LeetCode">Redundant Connection (#684) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Union Find Cycle</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_25" data-id="dsa_p5_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12405,7 +12616,7 @@ class Graph {
 <tr>
 <td>98</td>
 <td>Topo Sort</td>
-<td>Course Schedule II (#210)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Course+Schedule+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Course Schedule II on LeetCode">Course Schedule II (#210) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Kahn In-Degree</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_29" data-id="dsa_p5_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12416,7 +12627,7 @@ class Graph {
 <tr>
 <td>99</td>
 <td>Topo Sort</td>
-<td>Alien Dictionary (#269)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Alien+Dictionary" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Alien Dictionary on LeetCode">Alien Dictionary (#269) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Topo Sort DAG</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_33" data-id="dsa_p5_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12427,7 +12638,7 @@ class Graph {
 <tr>
 <td>100</td>
 <td>Shortest Path</td>
-<td>Word Ladder (#127)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Word+Ladder" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Word Ladder on LeetCode">Word Ladder (#127) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Unweighted BFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_37" data-id="dsa_p5_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12438,7 +12649,7 @@ class Graph {
 <tr>
 <td>101</td>
 <td>Shortest Path</td>
-<td>Shortest Path in Binary Matrix (#1091)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Shortest+Path+in+Binary+Matrix" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Shortest Path in Binary Matrix on LeetCode">Shortest Path in Binary Matrix (#1091) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>8-Direction BFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_41" data-id="dsa_p5_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12449,7 +12660,7 @@ class Graph {
 <tr>
 <td>102</td>
 <td>Shortest Path</td>
-<td>Rotting Oranges (#994)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Rotting+Oranges" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Rotting Oranges on LeetCode">Rotting Oranges (#994) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Multi-Source BFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_45" data-id="dsa_p5_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12460,7 +12671,7 @@ class Graph {
 <tr>
 <td>103</td>
 <td>Shortest Path</td>
-<td>Open the Lock (#752)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Open+the+Lock" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Open the Lock on LeetCode">Open the Lock (#752) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>BFS State Space</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_49" data-id="dsa_p5_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12471,7 +12682,7 @@ class Graph {
 <tr>
 <td>104</td>
 <td>Dijkstra</td>
-<td>Network Delay Time (#743)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Network+Delay+Time" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Network Delay Time on LeetCode">Network Delay Time (#743) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>MinHeap Dijkstra</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_53" data-id="dsa_p5_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12482,7 +12693,7 @@ class Graph {
 <tr>
 <td>105</td>
 <td>Dijkstra</td>
-<td>Path with Minimum Effort (#1631)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Path+with+Minimum+Effort" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Path with Minimum Effort on LeetCode">Path with Minimum Effort (#1631) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Grid Dijkstra</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_57" data-id="dsa_p5_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12493,7 +12704,7 @@ class Graph {
 <tr>
 <td>106</td>
 <td>Dijkstra</td>
-<td>Cheapest Flights Within K Stops (#787)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Cheapest+Flights+Within+K+Stops" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Cheapest Flights Within K Stops on LeetCode">Cheapest Flights Within K Stops (#787) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Bellman-Ford / BFS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_61" data-id="dsa_p5_61" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12504,7 +12715,7 @@ class Graph {
 <tr>
 <td>107</td>
 <td>MST</td>
-<td>Min Cost to Connect Points (#1584)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Min+Cost+to+Connect+Points" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Min Cost to Connect Points on LeetCode">Min Cost to Connect Points (#1584) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Kruskal / Prim</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_65" data-id="dsa_p5_65" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12515,7 +12726,7 @@ class Graph {
 <tr>
 <td>108</td>
 <td>Union-Find</td>
-<td>Number of Provinces (#547)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Number+of+Provinces" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Number of Provinces on LeetCode">Number of Provinces (#547) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Component Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_69" data-id="dsa_p5_69" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12526,7 +12737,7 @@ class Graph {
 <tr>
 <td>109</td>
 <td>Union-Find</td>
-<td>Accounts Merge (#721)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Accounts+Merge" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Accounts Merge on LeetCode">Accounts Merge (#721) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Union by Email</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_73" data-id="dsa_p5_73" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12537,7 +12748,7 @@ class Graph {
 <tr>
 <td>110</td>
 <td>Union-Find</td>
-<td>Graph Valid Tree (#261)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Graph+Valid+Tree" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Graph Valid Tree on LeetCode">Graph Valid Tree (#261) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>N-1 Edges + UF</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_77" data-id="dsa_p5_77" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12548,7 +12759,7 @@ class Graph {
 <tr>
 <td>111</td>
 <td>Union-Find</td>
-<td>Number of Connected Components (#323)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Number+of+Connected+Components" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Number of Connected Components on LeetCode">Number of Connected Components (#323) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>DSU Components</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_81" data-id="dsa_p5_81" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12570,7 +12781,7 @@ class Graph {
 <tr>
 <td>113</td>
 <td>Advanced Graph</td>
-<td>Critical Connections in Network (#1192)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Critical+Connections+in+Network" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Critical Connections in Network on LeetCode">Critical Connections in Network (#1192) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Tarjan Bridges</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_89" data-id="dsa_p5_89" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12581,7 +12792,7 @@ class Graph {
 <tr>
 <td>114</td>
 <td>Advanced Graph</td>
-<td>Reconstruct Itinerary (#332)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reconstruct+Itinerary" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reconstruct Itinerary on LeetCode">Reconstruct Itinerary (#332) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Eulerian Path</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_93" data-id="dsa_p5_93" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12592,7 +12803,7 @@ class Graph {
 <tr>
 <td>115</td>
 <td>Advanced Graph</td>
-<td>Swim in Rising Water (#778)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Swim+in+Rising+Water" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Swim in Rising Water on LeetCode">Swim in Rising Water (#778) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Dijkstra / BS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p5_97" data-id="dsa_p5_97" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -12604,7 +12815,7 @@ class Graph {
 <hr>
 
 
-<div class="topic-header-banner" id="topic-39-greedy-fundamentals-&-choice-property">
+<div class="topic-header-banner" id="topic-39-greedy-fundamentals-choice-property">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 6: Greedy</span>
     <span class="tag tag-number">Topic #39</span>
@@ -12632,7 +12843,7 @@ class Graph {
 </ul>
 <hr>
 
-<div class="topic-header-banner" id="topic-40-interval-scheduling-&-overlaps">
+<div class="topic-header-banner" id="topic-40-interval-scheduling-overlaps">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 6: Greedy</span>
     <span class="tag tag-number">Topic #40</span>
@@ -12692,7 +12903,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-41-interval-merging-&-non-overlapping">
+<div class="topic-header-banner" id="topic-41-interval-merging-non-overlapping">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 6: Greedy</span>
     <span class="tag tag-number">Topic #41</span>
@@ -12894,7 +13105,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-43-circular-routing-&-gas-station">
+<div class="topic-header-banner" id="topic-43-circular-routing-gas-station">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 6: Greedy</span>
     <span class="tag tag-number">Topic #43</span>
@@ -13003,7 +13214,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-44-partitioning-&-scheduling">
+<div class="topic-header-banner" id="topic-44-partitioning-scheduling">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 6: Greedy</span>
     <span class="tag tag-number">Topic #44</span>
@@ -13129,6 +13340,14 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 </blockquote>
 <hr>
 <h2 id="phase-6-master-problem-tracker-15-curated-problems" class="heading-anchor"><a href="#phase-6-master-problem-tracker-15-curated-problems" class="anchor-link">#</a>🔁 Phase 6 Master Problem Tracker (15 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -13146,7 +13365,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tbody><tr>
 <td>116</td>
 <td>Intervals</td>
-<td>Merge Intervals (#56)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Merge+Intervals" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Merge Intervals on LeetCode">Merge Intervals (#56) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Start Time Sort</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_1" data-id="dsa_p6_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13157,7 +13376,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>117</td>
 <td>Intervals</td>
-<td>Insert Interval (#57)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Insert+Interval" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Insert Interval on LeetCode">Insert Interval (#57) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Left/Overlap/Right</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_5" data-id="dsa_p6_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13168,7 +13387,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>118</td>
 <td>Intervals</td>
-<td>Non-overlapping Intervals (#435)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Non-overlapping+Intervals" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Non-overlapping Intervals on LeetCode">Non-overlapping Intervals (#435) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>End Time Greedy</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_9" data-id="dsa_p6_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13179,7 +13398,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>119</td>
 <td>Intervals</td>
-<td>Meeting Rooms (#252)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Meeting+Rooms" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Meeting Rooms on LeetCode">Meeting Rooms (#252) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Overlap Check</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_13" data-id="dsa_p6_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13190,7 +13409,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>120</td>
 <td>Intervals</td>
-<td>Meeting Rooms II (#253)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Meeting+Rooms+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Meeting Rooms II on LeetCode">Meeting Rooms II (#253) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Min-Heap Sweep</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_17" data-id="dsa_p6_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13201,7 +13420,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>121</td>
 <td>Jump Game</td>
-<td>Jump Game (#55)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Jump+Game" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Jump Game on LeetCode">Jump Game (#55) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Max Reachable</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_21" data-id="dsa_p6_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13212,7 +13431,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>122</td>
 <td>Jump Game</td>
-<td>Jump Game II (#45)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Jump+Game+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Jump Game II on LeetCode">Jump Game II (#45) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>BFS Range Window</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_25" data-id="dsa_p6_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13223,7 +13442,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>123</td>
 <td>Routing</td>
-<td>Gas Station (#134)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Gas+Station" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Gas Station on LeetCode">Gas Station (#134) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Surplus Reset</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_29" data-id="dsa_p6_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13234,7 +13453,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>124</td>
 <td>Two-Pass</td>
-<td>Candy (#135)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Candy" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Candy on LeetCode">Candy (#135) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Left &amp; Right Pass</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_33" data-id="dsa_p6_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13245,7 +13464,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>125</td>
 <td>Partitioning</td>
-<td>Partition Labels (#763)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Partition+Labels" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Partition Labels on LeetCode">Partition Labels (#763) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Last Index Window</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_37" data-id="dsa_p6_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13256,7 +13475,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>126</td>
 <td>Scheduling</td>
-<td>Task Scheduler (#621)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Task+Scheduler" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Task Scheduler on LeetCode">Task Scheduler (#621) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Idle Slots Formula</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_41" data-id="dsa_p6_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13267,7 +13486,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>127</td>
 <td>Greedy Math</td>
-<td>Maximum Swap (#670)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Maximum+Swap" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Maximum Swap on LeetCode">Maximum Swap (#670) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Rightmost Max Digit</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_45" data-id="dsa_p6_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13289,7 +13508,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>129</td>
 <td>Greedy Array</td>
-<td>Hand of Straights (#846)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Hand+of+Straights" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Hand of Straights on LeetCode">Hand of Straights (#846) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Frequency Map Greedy</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_53" data-id="dsa_p6_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13300,7 +13519,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>130</td>
 <td>Subsequences</td>
-<td>Valid Parenthesis String (#678)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Parenthesis+String" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Parenthesis String on LeetCode">Valid Parenthesis String (#678) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Min/Max Open Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p6_57" data-id="dsa_p6_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -13539,7 +13758,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-48-0/1-knapsack-pattern">
+<div class="topic-header-banner" id="topic-48-01-knapsack-pattern">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 7: Dynamic Programming</span>
     <span class="tag tag-number">Topic #48</span>
@@ -13690,7 +13909,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-50-longest-common-subsequence-(lcs)">
+<div class="topic-header-banner" id="topic-50-longest-common-subsequence-lcs">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 7: Dynamic Programming</span>
     <span class="tag tag-number">Topic #50</span>
@@ -13818,7 +14037,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-52-longest-increasing-subsequence-(lis)">
+<div class="topic-header-banner" id="topic-52-longest-increasing-subsequence-lis">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 7: Dynamic Programming</span>
     <span class="tag tag-number">Topic #52</span>
@@ -13989,7 +14208,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 
 <hr>
 
-<div class="topic-header-banner" id="topic-55-matrix-chain-multiplication-(mcm)">
+<div class="topic-header-banner" id="topic-55-matrix-chain-multiplication-mcm">
   <div class="topic-meta-tags">
     <span class="tag tag-phase">Phase 7: Dynamic Programming</span>
     <span class="tag tag-number">Topic #55</span>
@@ -14260,6 +14479,14 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 </blockquote>
 <hr>
 <h2 id="phase-7-master-problem-tracker-30-curated-problems" class="heading-anchor"><a href="#phase-7-master-problem-tracker-30-curated-problems" class="anchor-link">#</a>🔁 Phase 7 Master Problem Tracker (30 Curated Problems)</h2>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
 <div class="table-container"><table>
 <thead>
 <tr>
@@ -14277,7 +14504,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tbody><tr>
 <td>131</td>
 <td>1D DP</td>
-<td>Climbing Stairs (#70)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Climbing+Stairs" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Climbing Stairs on LeetCode">Climbing Stairs (#70) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Fibonacci State</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_1" data-id="dsa_p7_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14288,7 +14515,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>132</td>
 <td>1D DP</td>
-<td>Min Cost Climbing Stairs (#746)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Min+Cost+Climbing+Stairs" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Min Cost Climbing Stairs on LeetCode">Min Cost Climbing Stairs (#746) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>1D Min Transition</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_5" data-id="dsa_p7_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14299,7 +14526,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>133</td>
 <td>1D DP</td>
-<td>House Robber (#198)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=House+Robber" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open House Robber on LeetCode">House Robber (#198) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Rob vs Skip</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_9" data-id="dsa_p7_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14310,7 +14537,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>134</td>
 <td>1D DP</td>
-<td>House Robber II (#213)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=House+Robber+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open House Robber II on LeetCode">House Robber II (#213) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Circular Dual Pass</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_13" data-id="dsa_p7_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14321,7 +14548,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>135</td>
 <td>1D DP</td>
-<td>Decode Ways (#91)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Decode+Ways" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Decode Ways on LeetCode">Decode Ways (#91) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Valid 1/2 Digits</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_17" data-id="dsa_p7_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14332,7 +14559,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>136</td>
 <td>2D Grid DP</td>
-<td>Unique Paths (#62)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Unique+Paths" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Unique Paths on LeetCode">Unique Paths (#62) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Grid Combinatorics</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_21" data-id="dsa_p7_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14343,7 +14570,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>137</td>
 <td>2D Grid DP</td>
-<td>Unique Paths II (#63)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Unique+Paths+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Unique Paths II on LeetCode">Unique Paths II (#63) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Obstacle Grid</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_25" data-id="dsa_p7_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14354,7 +14581,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>138</td>
 <td>2D Grid DP</td>
-<td>Minimum Path Sum (#64)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Minimum+Path+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Minimum Path Sum on LeetCode">Minimum Path Sum (#64) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>In-place Grid Min</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_29" data-id="dsa_p7_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14365,7 +14592,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>139</td>
 <td>0/1 Knapsack</td>
-<td>Partition Equal Subset Sum (#416)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Partition+Equal+Subset+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Partition Equal Subset Sum on LeetCode">Partition Equal Subset Sum (#416) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>1D Backward Scan</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_33" data-id="dsa_p7_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14376,7 +14603,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>140</td>
 <td>0/1 Knapsack</td>
-<td>Target Sum (#494)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Target+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Target Sum on LeetCode">Target Sum (#494) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Subset Sum Transform</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_37" data-id="dsa_p7_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14387,7 +14614,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>141</td>
 <td>0/1 Knapsack</td>
-<td>Ones and Zeroes (#474)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Ones+and+Zeroes" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Ones and Zeroes on LeetCode">Ones and Zeroes (#474) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>2D Capacity Knapsack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_41" data-id="dsa_p7_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14398,7 +14625,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>142</td>
 <td>Unbounded</td>
-<td>Coin Change (#322)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Coin+Change" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Coin Change on LeetCode">Coin Change (#322) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Min Coin Unbounded</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_45" data-id="dsa_p7_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14409,7 +14636,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>143</td>
 <td>Unbounded</td>
-<td>Coin Change II (#518)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Coin+Change+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Coin Change II on LeetCode">Coin Change II (#518) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Combinations Loop</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_49" data-id="dsa_p7_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14420,7 +14647,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>144</td>
 <td>Unbounded</td>
-<td>Perfect Squares (#279)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Perfect+Squares" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Perfect Squares on LeetCode">Perfect Squares (#279) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Min Squares Sum</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_53" data-id="dsa_p7_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14431,7 +14658,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>145</td>
 <td>LCS</td>
-<td>Longest Common Subsequence (#1143)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Common+Subsequence" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Common Subsequence on LeetCode">Longest Common Subsequence (#1143) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>2D Match Transition</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_57" data-id="dsa_p7_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14442,7 +14669,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>146</td>
 <td>LCS</td>
-<td>Delete Operation Two Strings (#583)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Delete+Operation+Two+Strings" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Delete Operation Two Strings on LeetCode">Delete Operation Two Strings (#583) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>M + N - 2*LCS</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_61" data-id="dsa_p7_61" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14453,7 +14680,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>147</td>
 <td>LCS</td>
-<td>Shortest Common Superseq (#1092)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Shortest+Common+Superseq" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Shortest Common Superseq on LeetCode">Shortest Common Superseq (#1092) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>LCS Backtrack Print</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_65" data-id="dsa_p7_65" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14464,7 +14691,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>148</td>
 <td>Edit Dist</td>
-<td>Edit Distance (#72)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Edit+Distance" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Edit Distance on LeetCode">Edit Distance (#72) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Levenshtein 3-Way</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_69" data-id="dsa_p7_69" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14475,7 +14702,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>149</td>
 <td>Edit Dist</td>
-<td>Distinct Subsequences (#115)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Distinct+Subsequences" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Distinct Subsequences on LeetCode">Distinct Subsequences (#115) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Matching Subseq Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_73" data-id="dsa_p7_73" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14486,7 +14713,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>150</td>
 <td>LIS</td>
-<td>Longest Increasing Subseq (#300)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Increasing+Subseq" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Increasing Subseq on LeetCode">Longest Increasing Subseq (#300) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Patience BS O(N log N)</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_77" data-id="dsa_p7_77" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14497,7 +14724,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>151</td>
 <td>LIS</td>
-<td>Russian Doll Envelopes (#354)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Russian+Doll+Envelopes" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Russian Doll Envelopes on LeetCode">Russian Doll Envelopes (#354) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Sort W + LIS on H</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_81" data-id="dsa_p7_81" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14508,7 +14735,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>152</td>
 <td>Palindromes</td>
-<td>Longest Palindromic Subseq (#516)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Palindromic+Subseq" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Palindromic Subseq on LeetCode">Longest Palindromic Subseq (#516) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>LCS on Reverse</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_85" data-id="dsa_p7_85" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14519,7 +14746,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>153</td>
 <td>Palindromes</td>
-<td>Palindromic Substrings (#647)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Palindromic+Substrings" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Palindromic Substrings on LeetCode">Palindromic Substrings (#647) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>2D Table / Center</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_89" data-id="dsa_p7_89" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14552,7 +14779,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>156</td>
 <td>MCM</td>
-<td>Burst Balloons (#312)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Burst+Balloons" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Burst Balloons on LeetCode">Burst Balloons (#312) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Last Burst Interval</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_101" data-id="dsa_p7_101" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14563,7 +14790,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>157</td>
 <td>Tree DP</td>
-<td>House Robber III (#337)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=House+Robber+III" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open House Robber III on LeetCode">House Robber III (#337) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>[rob, skip] Tuple</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_105" data-id="dsa_p7_105" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14574,7 +14801,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>158</td>
 <td>Bitmask DP</td>
-<td>Matchsticks to Square (#473)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Matchsticks+to+Square" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Matchsticks to Square on LeetCode">Matchsticks to Square (#473) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Bitmask 4 Sides</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_109" data-id="dsa_p7_109" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14585,7 +14812,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>159</td>
 <td>Counting</td>
-<td>Dice Rolls With Target Sum (#1155)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Dice+Rolls+With+Target+Sum" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Dice Rolls With Target Sum on LeetCode">Dice Rolls With Target Sum (#1155) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Rolling Sum Modulo</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_113" data-id="dsa_p7_113" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -14596,7 +14823,7 @@ Meetings ko start time ke according sort karo. Min-Heap mein har running room ka
 <tr>
 <td>160</td>
 <td>Counting</td>
-<td>Knight Dialer (#935)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Knight+Dialer" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Knight Dialer on LeetCode">Knight Dialer (#935) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Graph DP Transitions</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p7_117" data-id="dsa_p7_117" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15496,6 +15723,15 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
   <h2 class="heading-anchor"><a href="#phase-8-master-problem-tracker-15-curated-problems" class="anchor-link">#</a>🔁 Phase 8 Master Problem Tracker (15 Curated Problems)</h2>
   <p class="tracker-lead">Track your bit manipulation progress. Check off solved problems and revisions — all checkboxes persist automatically in local storage.</p>
 </div>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
+
 
 <div class="table-container"><table>
 <thead>
@@ -15515,7 +15751,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>161</td>
 <td>Bit Operators</td>
-<td>Single Number I (#136)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Single+Number+I" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Single Number I on LeetCode">Single Number I (#136) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>XOR Identity</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_1" data-id="dsa_p8_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15526,7 +15762,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>162</td>
 <td>Bit Counting</td>
-<td>Number of 1 Bits (#191)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Number+of+1+Bits" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Number of 1 Bits on LeetCode">Number of 1 Bits (#191) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Kernighan n & (n - 1)</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_5" data-id="dsa_p8_5" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15537,7 +15773,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>163</td>
 <td>Bit Counting</td>
-<td>Counting Bits (#338)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Counting+Bits" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Counting Bits on LeetCode">Counting Bits (#338) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>DP Bit Transitions</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_9" data-id="dsa_p8_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15548,7 +15784,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>164</td>
 <td>Bit Reversal</td>
-<td>Reverse Bits (#190)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reverse+Bits" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reverse Bits on LeetCode">Reverse Bits (#190) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>32-bit Shift Reversal</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_13" data-id="dsa_p8_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15559,7 +15795,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>165</td>
 <td>Power of 2</td>
-<td>Power of Two (#231)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Power+of+Two" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Power of Two on LeetCode">Power of Two (#231) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>n & (n - 1) == 0</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_17" data-id="dsa_p8_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15570,7 +15806,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>166</td>
 <td>Bit Operators</td>
-<td>Missing Number (#268)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Missing+Number" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Missing Number on LeetCode">Missing Number (#268) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>XOR Range Cancellation</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_21" data-id="dsa_p8_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15581,7 +15817,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>167</td>
 <td>Single Number</td>
-<td>Single Number II (#137)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Single+Number+II" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Single Number II on LeetCode">Single Number II (#137) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Modulo 3 / State Machine</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_25" data-id="dsa_p8_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15592,7 +15828,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>168</td>
 <td>Single Number</td>
-<td>Single Number III (#260)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Single+Number+III" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Single Number III on LeetCode">Single Number III (#260) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Lowest Set Bit Bucket</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_29" data-id="dsa_p8_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15603,7 +15839,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>169</td>
 <td>Bit Shifts</td>
-<td>Bitwise AND Range (#201)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Bitwise+AND+Range" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Bitwise AND Range on LeetCode">Bitwise AND Range (#201) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Common Prefix Shifts</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_33" data-id="dsa_p8_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15614,7 +15850,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>170</td>
 <td>Bit Shifts</td>
-<td>Divide Two Integers (#29)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Divide+Two+Integers" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Divide Two Integers on LeetCode">Divide Two Integers (#29) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Exponential Bit Doubling</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_37" data-id="dsa_p8_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15625,7 +15861,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>171</td>
 <td>Bitmasking</td>
-<td>Subsets (#78)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Subsets" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Subsets on LeetCode">Subsets (#78) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>0 to (1 << N) - 1 Iteration</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_41" data-id="dsa_p8_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15636,7 +15872,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>172</td>
 <td>Power of 2</td>
-<td>Power of Four (#342)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Power+of+Four" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Power of Four on LeetCode">Power of Four (#342) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>Power of 2 + 0x55555555</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_45" data-id="dsa_p8_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15647,7 +15883,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>173</td>
 <td>Bit Math</td>
-<td>Sum of Two Integers (#371)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Sum+of+Two+Integers" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Sum of Two Integers on LeetCode">Sum of Two Integers (#371) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>XOR Add & Carry Shift</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_49" data-id="dsa_p8_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15658,7 +15894,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>174</td>
 <td>Bitmasking</td>
-<td>Max Product Word Lengths (#318)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Max+Product+Word+Lengths" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Max Product Word Lengths on LeetCode">Max Product Word Lengths (#318) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>26-bit Character Mask</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_53" data-id="dsa_p8_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -15669,7 +15905,7 @@ console.log(maxProduct(["abcw","baz","foo","bar","xtfn","abcdef"])); // 16 ("abc
 <tr>
 <td>175</td>
 <td>Bit Counting</td>
-<td>Minimum Bit Flips (#2220)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Minimum+Bit+Flips" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Minimum Bit Flips on LeetCode">Minimum Bit Flips (#2220) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>XOR + Set Bit Count</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p8_57" data-id="dsa_p8_57" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16804,6 +17040,15 @@ function knuthOptimization(nums) {
   <h2 class="heading-anchor"><a href="#phase-9-master-problem-tracker-20-curated-problems" class="anchor-link">#</a>🔁 Phase 9 Master Problem Tracker (20 Curated Problems)</h2>
   <p class="tracker-lead">The final boss problem set! Track your advanced data structures & algorithms progress. Every checkbox persists automatically in local storage.</p>
 </div>
+<div class="table-filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-pill active" onclick="filterProblemTable(this, 'all')">All</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'easy')">🟢 Easy</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'medium')">🟡 Medium</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'hard')">🔴 Hard</button>
+  <button class="filter-pill" onclick="filterProblemTable(this, 'unsolved')">⏳ Unsolved Only</button>
+</div>
+
 
 <div class="table-container"><table>
 <thead>
@@ -16823,7 +17068,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>176</td>
 <td>Segment Tree</td>
-<td>Range Sum Query - Mutable (#307)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Range+Sum+Query+-+Mutable" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Range Sum Query - Mutable on LeetCode">Range Sum Query - Mutable (#307) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Point Update SegTree</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_1" data-id="dsa_p9_1" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16845,7 +17090,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>178</td>
 <td>Segment Tree</td>
-<td>My Calendar III (#732)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=My+Calendar+III" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open My Calendar III on LeetCode">My Calendar III (#732) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Dynamic SegTree Sweep</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_9" data-id="dsa_p9_9" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16856,7 +17101,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>179</td>
 <td>Fenwick Tree</td>
-<td>Range Sum Query 2D - Mutable (#308)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Range+Sum+Query+2D+-+Mutable" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Range Sum Query 2D - Mutable on LeetCode">Range Sum Query 2D - Mutable (#308) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>2D Fenwick Tree</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_13" data-id="dsa_p9_13" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16867,7 +17112,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>180</td>
 <td>Fenwick Tree</td>
-<td>Count Smaller Numbers After Self (#315)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Count+Smaller+Numbers+After+Self" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Count Smaller Numbers After Self on LeetCode">Count Smaller Numbers After Self (#315) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Fenwick Tree Inversions</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_17" data-id="dsa_p9_17" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16878,7 +17123,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>181</td>
 <td>KMP String</td>
-<td>Find Index of First Occurrence (#28)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Find+Index+of+First+Occurrence" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Find Index of First Occurrence on LeetCode">Find Index of First Occurrence (#28) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-easy"><span class="dot"></span>Easy</span></td>
 <td>LPS Array Matching</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_21" data-id="dsa_p9_21" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16889,7 +17134,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>182</td>
 <td>KMP String</td>
-<td>Shortest Palindrome (#214)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Shortest+Palindrome" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Shortest Palindrome on LeetCode">Shortest Palindrome (#214) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>LPS on s + '#' + rev</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_25" data-id="dsa_p9_25" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16900,7 +17145,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>183</td>
 <td>Rolling Hash</td>
-<td>Repeated DNA Sequences (#187)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Repeated+DNA+Sequences" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Repeated DNA Sequences on LeetCode">Repeated DNA Sequences (#187) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Rabin-Karp Rolling Hash</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_29" data-id="dsa_p9_29" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16911,7 +17156,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>184</td>
 <td>Rolling Hash</td>
-<td>Longest Duplicate Substring (#1044)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Longest+Duplicate+Substring" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Longest Duplicate Substring on LeetCode">Longest Duplicate Substring (#1044) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>BS on Length + Hash</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_33" data-id="dsa_p9_33" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16922,7 +17167,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>185</td>
 <td>Z-Algorithm</td>
-<td>Sum of Scores of Built Strings (#2223)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Sum+of+Scores+of+Built+Strings" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Sum of Scores of Built Strings on LeetCode">Sum of Scores of Built Strings (#2223) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Z-Array Prefix Match</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_37" data-id="dsa_p9_37" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16933,7 +17178,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>186</td>
 <td>Tarjan SCC</td>
-<td>Critical Connections in Network (#1192)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Critical+Connections+in+Network" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Critical Connections in Network on LeetCode">Critical Connections in Network (#1192) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Bridge low[v] > disc[u]</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_41" data-id="dsa_p9_41" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16944,7 +17189,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>187</td>
 <td>Eulerian Path</td>
-<td>Reconstruct Itinerary (#332)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Reconstruct+Itinerary" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Reconstruct Itinerary on LeetCode">Reconstruct Itinerary (#332) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Hierholzer Post-Order</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_45" data-id="dsa_p9_45" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16955,7 +17200,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>188</td>
 <td>Eulerian Path</td>
-<td>Valid Arrangement of Pairs (#2097)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Valid+Arrangement+of+Pairs" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Valid Arrangement of Pairs on LeetCode">Valid Arrangement of Pairs (#2097) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Eulerian Directed Path</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_49" data-id="dsa_p9_49" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16966,7 +17211,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>189</td>
 <td>Adv Graph</td>
-<td>Course Schedule IV (#1462)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Course+Schedule+IV" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Course Schedule IV on LeetCode">Course Schedule IV (#1462) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-medium"><span class="dot"></span>Medium</span></td>
 <td>Transitive Closure Reach</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_53" data-id="dsa_p9_53" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16988,7 +17233,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>191</td>
 <td>Tree DP</td>
-<td>Count Subtrees Max Distance (#1617)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Count+Subtrees+Max+Distance" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Count Subtrees Max Distance on LeetCode">Count Subtrees Max Distance (#1617) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Tree Diameter + Bitmask</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_61" data-id="dsa_p9_61" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -16999,7 +17244,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>192</td>
 <td>Adv DP</td>
-<td>Freedom Trail (#514)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Freedom+Trail" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Freedom Trail on LeetCode">Freedom Trail (#514) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Ring State Transition</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_65" data-id="dsa_p9_65" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -17010,7 +17255,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>193</td>
 <td>Adv DP</td>
-<td>Number of Music Playlists (#920)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Number+of+Music+Playlists" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Number of Music Playlists on LeetCode">Number of Music Playlists (#920) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>Combinatorics DP</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_69" data-id="dsa_p9_69" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -17021,7 +17266,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>194</td>
 <td>Adv DP</td>
-<td>Profitable Schemes (#879)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=Profitable+Schemes" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open Profitable Schemes on LeetCode">Profitable Schemes (#879) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>3D 0/1 Knapsack</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_73" data-id="dsa_p9_73" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -17032,7 +17277,7 @@ function knuthOptimization(nums) {
 <tr>
 <td>195</td>
 <td>Adv DS</td>
-<td>The Skyline Problem (#218)</td>
+<td><a href="https://leetcode.com/problemset/all/?search=The+Skyline+Problem" target="_blank" rel="noopener noreferrer" class="problem-link" title="Open The Skyline Problem on LeetCode">The Skyline Problem (#218) <span class="ext-icon">↗</span></a></td>
 <td><span class="diff-badge diff-hard"><span class="dot"></span>Hard</span></td>
 <td>SegTree / MaxHeap Sweep</td>
 <td class="td-checkbox"><label class="checkbox-container"><input type="checkbox" class="interactive-chk" id="dsa_p9_77" data-id="dsa_p9_77" onchange="handleCheckChange(this)"><span class="custom-checkmark"></span></label></td>
@@ -17226,36 +17471,104 @@ function handleCheckChange(input) {
   updateProgressStats();
 }
 
+
+// Dynamic Progress Calculation for all 821 checkboxes
 function updateProgressStats() {
-  const checkboxes = document.querySelectorAll('.interactive-chk');
-  const total = checkboxes.length;
-  let checkedCount = 0;
-  
-  checkboxes.forEach(chk => {
-    if (chk.checked) checkedCount++;
-  });
+  const allCheckboxes = document.querySelectorAll('.interactive-chk');
+  const totalCheckboxes = allCheckboxes.length;
+  const checkedBoxes = document.querySelectorAll('.interactive-chk:checked');
+  const checkedCount = checkedBoxes.length;
+  const percent = totalCheckboxes > 0 ? Math.round((checkedCount / totalCheckboxes) * 100) : 0;
 
-  const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
-  
-  const fractionEl = document.getElementById('sidebarProgFraction');
-  const fillEl = document.getElementById('sidebarProgFill');
-  const percentEl = document.getElementById('sidebarProgPercent');
-  const heroCountEl = document.getElementById('hero-progress-count');
+  const sidebarProgFraction = document.getElementById('sidebarProgFraction');
+  if (sidebarProgFraction) sidebarProgFraction.textContent = `${checkedCount} / ${totalCheckboxes}`;
+
+  const sidebarProgFill = document.getElementById('sidebarProgFill');
+  if (sidebarProgFill) sidebarProgFill.style.width = `${percent}%`;
+
+  const sidebarProgPercent = document.getElementById('sidebarProgPercent');
+  if (sidebarProgPercent) sidebarProgPercent.textContent = `${percent}% Completed`;
+
+  const heroCountEl = document.getElementById('heroCount');
   const statSolvedCount = document.getElementById('stat-solved-count');
-
-  if (fractionEl) fractionEl.textContent = `${checkedCount} / ${total}`;
-  if (fillEl) fillEl.style.width = `${percent}%`;
-  if (percentEl) percentEl.textContent = `${percent}% Completed`;
-  
   const solvedCount = countSolvedProblems();
+
   if (heroCountEl) heroCountEl.textContent = `${solvedCount} / 195`;
   if (statSolvedCount) statSolvedCount.textContent = `${solvedCount} / 195`;
 }
 
+// Theme Switcher Logic (Obsidian -> Midnight -> Light -> Obsidian)
+const THEMES = ['obsidian', 'midnight', 'light'];
+let currentThemeIndex = 0;
+
+function toggleTheme() {
+  currentThemeIndex = (currentThemeIndex + 1) % THEMES.length;
+  const theme = THEMES[currentThemeIndex];
+  applyTheme(theme);
+  localStorage.setItem('dsa_theme', theme);
+}
+
+function applyTheme(theme) {
+  document.body.classList.remove('theme-midnight', 'theme-light');
+  const icon = document.getElementById('themeIcon');
+  if (theme === 'midnight') {
+    document.body.classList.add('theme-midnight');
+    if (icon) icon.textContent = '🌌';
+  } else if (theme === 'light') {
+    document.body.classList.add('theme-light');
+    if (icon) icon.textContent = '☀️';
+  } else {
+    if (icon) icon.textContent = '🌙';
+  }
+}
+
+// Load saved theme on boot
+const savedTheme = localStorage.getItem('dsa_theme');
+if (savedTheme) {
+  currentThemeIndex = THEMES.indexOf(savedTheme);
+  if (currentThemeIndex === -1) currentThemeIndex = 0;
+  applyTheme(savedTheme);
+}
+
+// Problem Table Dynamic Filtering
+function filterProblemTable(btn, filterType) {
+  const bar = btn.closest('.table-filter-bar');
+  if (bar) {
+    bar.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Find associated table (the next sibling table container)
+  let container = bar.nextElementSibling;
+  while (container && !container.classList.contains('table-container')) {
+    container = container.nextElementSibling;
+  }
+  if (!container) return;
+
+  const rows = container.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    const diffBadge = row.querySelector('.diff-badge');
+    const chk = row.querySelector('td:nth-child(6) input[type="checkbox"]');
+    let show = false;
+
+    if (filterType === 'all') {
+      show = true;
+    } else if (filterType === 'unsolved') {
+      show = chk ? !chk.checked : true;
+    } else if (diffBadge) {
+      const text = diffBadge.textContent.toLowerCase();
+      show = text.includes(filterType);
+    }
+
+    row.style.display = show ? '' : 'none';
+  });
+}
+
+
 function countSolvedProblems() {
   let solved = 0;
   // Check Phase 1 table
-  const p1Table = document.querySelector('#phase-1-problem-tracking + p + .table-container table') || document.querySelector('#phase-1-problem-tracking + .table-container table');
+  const p1Table = document.querySelector('#phase-1-master-problem-tracker-20-curated-problems + .table-container table') || document.querySelector('#phase-1-master-problem-tracker-20-curated-problems ~ .table-container table') || document.querySelector('#phase-1-problem-tracking + .table-container table');
   if (p1Table) {
     p1Table.querySelectorAll('tbody tr').forEach(r => {
       const chk = r.querySelector('td:nth-child(6) input[type="checkbox"]');

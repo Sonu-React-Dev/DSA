@@ -2002,11 +2002,11 @@ body.theme-light .app-sidebar {
   </div>
 
   <div class="hero-cta-buttons">
-    <a href="#v2-cognitive-system" class="btn btn-primary" style="box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);"><span class="btn-icon">🧠</span> V2 Cognitive Hub</a>
-    <a href="#v2-decision-trees" class="btn btn-accent"><span class="btn-icon">🌲</span> Decision Trees</a>
-    <a href="#v2-pattern-showdowns" class="btn btn-secondary"><span class="btn-icon">⚔️</span> Pattern Showdowns</a>
-    <a href="#master-index" class="btn btn-ghost"><span class="btn-icon">🧭</span> Roadmap</a>
-    <a href="#grand-finale-milestone" class="btn btn-secondary" style="color: #facc15;"><span class="btn-icon">👑</span> 100% Trophy</a>
+    <a href="#v2-24hr-emergency-sheet" class="btn btn-primary" style="background: linear-gradient(90deg, #ef4444, #f97316); border: none; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);"><span class="btn-icon">⚡</span> 24-Hr Emergency Sheet</a>
+    <a href="#v2-code-skeletons" class="btn btn-accent" style="box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);"><span class="btn-icon">🧱</span> 10 Code Skeletons</a>
+    <a href="#v2-cognitive-system" class="btn btn-secondary"><span class="btn-icon">🧠</span> Cognitive Hub</a>
+    <a href="#v2-decision-trees" class="btn btn-secondary"><span class="btn-icon">🌲</span> Decision Trees</a>
+    <a href="#grand-finale-milestone" class="btn btn-ghost" style="color: #facc15;"><span class="btn-icon">👑</span> 100% Trophy</a>
   </div>
 </header>
 
@@ -2822,6 +2822,805 @@ body.theme-light .app-sidebar {
 </section>
 <hr>
 
+
+<section class="v2-module emergency-sheet-section" id="v2-24hr-emergency-sheet" style="background: linear-gradient(145deg, rgba(239, 68, 68, 0.15), rgba(15, 23, 42, 0.95)); border: 2px solid rgba(239, 68, 68, 0.45); border-radius: 20px; padding: 36px 30px; margin: 45px 0; box-shadow: 0 20px 45px rgba(0,0,0,0.5), 0 0 35px rgba(239, 68, 68, 0.15);">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+    <div>
+      <span class="tag tag-phase" style="background: rgba(239, 68, 68, 0.25); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">⚡ FINAL 24 HOURS</span>
+      <h2 style="font-size: 28px; font-weight: 900; color: #f8fafc; margin: 10px 0 6px 0;">The 24-Hour Pre-Interview Emergency Sheet</h2>
+      <p style="color: #cbd5e1; font-size: 15px; margin: 0; line-height: 1.6;">
+        Review this exact 1-page summary the night and morning before your live coding interview. Contains all fatal V8 traps, core formulas, and recurrence relations.
+      </p>
+    </div>
+    <button class="btn btn-primary" onclick="window.print()" style="background: linear-gradient(90deg, #ef4444, #f97316); border: none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">
+      <span class="btn-icon">🖨️</span> Print Emergency Sheet (PDF)
+    </button>
+  </div>
+
+  <hr style="border-color: rgba(239, 68, 68, 0.2); margin: 20px 0 28px 0;">
+
+  <!-- Part A: 12 Fatal V8 JavaScript Traps -->
+  <h3 style="color: #fca5a5; font-size: 19px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+    <span>⚠️</span> 1. The 12 Fatal JavaScript Interview Traps (Don't Lose Points Here!)
+  </h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Dangerous Trap</th>
+          <th>What Actually Happens in V8</th>
+          <th>Mandatory Code Defense</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><code>[10, 2].sort()</code></td>
+          <td>Sorts as strings: returns <code>[10, 2]</code> because <code>"10" < "2"</code>!</td>
+          <td><strong>Always:</strong> <code>arr.sort((a, b) => a - b)</code></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><code>queue.shift()</code> inside loop</td>
+          <td>$O(N)$ re-indexing of every remaining element. Makes BFS $O(V^2)$!</td>
+          <td>Use head pointer: <code>let head = 0; const node = queue[head++];</code></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><code>str += char</code> in loop</td>
+          <td>Strings are immutable. Creates a new heap string every loop ($O(N^2)$).</td>
+          <td>Use: <code>arr.push(char);</code> then <code>arr.join('')</code></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><code>Math.max(...arr)</code></td>
+          <td>Pushes elements onto V8 call stack. Crashes with RangeError if $N > 65,536$!</td>
+          <td>Use for-loop: <code>for (const x of arr) if (x > max) max = x;</code></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Bitwise operators on $N > 2^{31}-1$</td>
+          <td>Truncates 64-bit float to 32-bit signed int. Wraps to negative numbers!</td>
+          <td>Verify $N < 2^{31}$, or use <code>BigInt</code> / <code>>>> 0</code> for unsigned.</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><code>Array(M).fill([])</code></td>
+          <td>All rows share the <strong>EXACT SAME</strong> array memory reference! Modifying row 0 modifies ALL rows!</td>
+          <td><strong>Always:</strong> <code>Array.from({ length: M }, () => [])</code></td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Binary Search Mid Overflow</td>
+          <td><code>Math.floor((low + high) / 2)</code> can overflow in 32-bit integer contexts.</td>
+          <td><strong>Always:</strong> <code>low + Math.floor((high - low) / 2)</code></td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>Float precision bug</td>
+          <td><code>0.1 + 0.2 === 0.3</code> evaluates to <code>false</code> (0.30000000000000004).</td>
+          <td>Use: <code>Math.abs(a - b) < Number.EPSILON</code> or scale to integers.</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>Object <code>{}</code> key coercion</td>
+          <td>Object keys are coerced to strings. <code>obj[{}]</code> becomes <code>obj["[object Object]"]</code>!</td>
+          <td><strong>Always:</strong> Use <code>new Map()</code> for non-primitive or dynamic keys.</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>V8 Recursion Stack Limit</td>
+          <td>Maximum call stack depth is $pprox 10,000$ frames. DFS on linear graph crashes!</td>
+          <td>If $N = 10^5$, rewrite DFS iteratively using an explicit array stack.</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td>Mutating array while iterating</td>
+          <td><code>arr.splice(i, 1)</code> shifts subsequent elements, skipping the next index!</td>
+          <td>Iterate backwards: <code>for (let i = arr.length - 1; i >= 0; i--)</code></td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td>Circular Index wrap-around</td>
+          <td>Negative modulo: <code>-1 % 5 = -1</code> in JavaScript (NOT 4!).</td>
+          <td><strong>Always:</strong> <code>(i - 1 + n) % n</code> to safely handle negative wrap.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Part B: 15 Golden Math & Bit Formulas -->
+  <h3 style="color: #67e8f9; font-size: 19px; margin: 28px 0 12px 0; display: flex; align-items: center; gap: 8px;">
+    <span>📐</span> 2. The 15 Golden Math &amp; Bitwise Formulas
+  </h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Operation</th>
+          <th>Formula</th>
+          <th>Interview Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Check k-th bit (0-indexed)</strong></td>
+          <td><code>(n &amp; (1 &lt;&lt; k)) !== 0</code></td>
+          <td>Bitmask DP state checking</td>
+        </tr>
+        <tr>
+          <td><strong>Set k-th bit to 1</strong></td>
+          <td><code>n | (1 &lt;&lt; k)</code></td>
+          <td>Marking item visited in bitmask</td>
+        </tr>
+        <tr>
+          <td><strong>Clear k-th bit to 0</strong></td>
+          <td><code>n &amp; ~(1 &lt;&lt; k)</code></td>
+          <td>Unmarking item in bitmask backtracking</td>
+        </tr>
+        <tr>
+          <td><strong>Toggle k-th bit</strong></td>
+          <td><code>n ^ (1 &lt;&lt; k)</code></td>
+          <td>Flip bit state</td>
+        </tr>
+        <tr>
+          <td><strong>Clear lowest set bit (Kernighan)</strong></td>
+          <td><code>n &amp; (n - 1)</code></td>
+          <td>Counting 1-bits in $O(\text{set bits})$ (LeetCode #191)</td>
+        </tr>
+        <tr>
+          <td><strong>Isolate lowest set bit</strong></td>
+          <td><code>n &amp; (-n)</code></td>
+          <td>Fenwick Tree index step / Single Number III partition</td>
+        </tr>
+        <tr>
+          <td><strong>Power of 2 check</strong></td>
+          <td><code>n &gt; 0 &amp;&amp; (n &amp; (n - 1)) === 0</code></td>
+          <td>LeetCode #231 $O(1)$ check</td>
+        </tr>
+        <tr>
+          <td><strong>XOR Self-Inverse</strong></td>
+          <td><code>a ^ a = 0</code> and <code>a ^ 0 = a</code></td>
+          <td>Single Number I (#136), Missing Number (#268)</td>
+        </tr>
+        <tr>
+          <td><strong>Sum of numbers 1 to N</strong></td>
+          <td><code>(N * (N + 1)) / 2</code></td>
+          <td>Find missing number in array</td>
+        </tr>
+        <tr>
+          <td><strong>GCD (Euclidean Algorithm)</strong></td>
+          <td><code>const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);</code></td>
+          <td>Fraction simplification, array rotation cycle</td>
+        </tr>
+        <tr>
+          <td><strong>Circular Array Wrap-around</strong></td>
+          <td>Next: <code>(i + 1) % n</code> | Prev: <code>(i - 1 + n) % n</code></td>
+          <td>Circular queues, Defuse Bomb, House Robber II</td>
+        </tr>
+        <tr>
+          <td><strong>Midpoint (Floor safe)</strong></td>
+          <td><code>low + Math.floor((high - low) / 2)</code></td>
+          <td>Binary Search universal pointer mid</td>
+        </tr>
+        <tr>
+          <td><strong>Ceil division of A by B</strong></td>
+          <td><code>Math.floor((A + B - 1) / B)</code></td>
+          <td>Capacity shipping, Koko eating bananas</td>
+        </tr>
+        <tr>
+          <td><strong>Submask Enumeration</strong></td>
+          <td><code>for (let s = mask; s > 0; s = (s - 1) &amp; mask)</code></td>
+          <td>Iterate all subsets of a bitmask in $O(3^N)$</td>
+        </tr>
+        <tr>
+          <td><strong>Fenwick Tree Parent Navigation</strong></td>
+          <td>Query: <code>i -= (i &amp; -i)</code> | Update: <code>i += (i &amp; -i)</code></td>
+          <td>Prefix sums & point updates in $O(\log N)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Part C: Top 10 DP Recurrences -->
+  <h3 style="color: #facc15; font-size: 19px; margin: 28px 0 12px 0; display: flex; align-items: center; gap: 8px;">
+    <span>🧩</span> 3. Top 10 Dynamic Programming Recurrence Cheat Sheet
+  </h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>DP Pattern</th>
+          <th>Recurrence Relation</th>
+          <th>Space Optimization Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Climbing Stairs (#70)</strong></td>
+          <td><code>dp[i] = dp[i-1] + dp[i-2]</code></td>
+          <td>2 variables: <code>prev1</code>, <code>prev2</code> ($O(1)$ space)</td>
+        </tr>
+        <tr>
+          <td><strong>House Robber (#198)</strong></td>
+          <td><code>dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i])</code></td>
+          <td>2 variables ($O(1)$ space)</td>
+        </tr>
+        <tr>
+          <td><strong>Unique Paths (#62)</strong></td>
+          <td><code>dp[r][c] = dp[r-1][c] + dp[r][c-1]</code></td>
+          <td>1D rolling row array of size $N$ ($O(N)$ space)</td>
+        </tr>
+        <tr>
+          <td><strong>0/1 Knapsack (#416)</strong></td>
+          <td><code>dp[w] = dp[w] || dp[w - num]</code> (Loop $w$ downwards!)</td>
+          <td>1D array, iterate backwards from Target down to num</td>
+        </tr>
+        <tr>
+          <td><strong>Unbounded Knapsack / Coin Change (#322)</strong></td>
+          <td><code>dp[w] = Math.min(dp[w], dp[w - coin] + 1)</code> (Loop $w$ forwards!)</td>
+          <td>1D array, iterate forwards from coin up to Target</td>
+        </tr>
+        <tr>
+          <td><strong>LCS (#1143)</strong></td>
+          <td><code>s1[i]==s2[j] ? 1 + dp[i-1][j-1] : max(dp[i-1][j], dp[i][j-1])</code></td>
+          <td>2 rows of size $M$ ($O(M)$ space)</td>
+        </tr>
+        <tr>
+          <td><strong>Edit Distance (#72)</strong></td>
+          <td><code>s1[i]==s2[j] ? dp[i-1][j-1] : 1 + min(insert, delete, replace)</code></td>
+          <td>2 rows of size $M$ ($O(M)$ space)</td>
+        </tr>
+        <tr>
+          <td><strong>LIS (#300)</strong></td>
+          <td>Patience sorting tails array + Binary Search (<code>low <= high</code>)</td>
+          <td>$O(N \log N)$ time, $O(N)$ space</td>
+        </tr>
+        <tr>
+          <td><strong>Tree DP (#337)</strong></td>
+          <td>Return <code>[rob, skip]</code> where <code>rob = root.val + left.skip + right.skip</code></td>
+          <td>Tuple return without extra cache ($O(H)$ recursion stack)</td>
+        </tr>
+        <tr>
+          <td><strong>Stock Cooldown (#309)</strong></td>
+          <td><code>held = max(held, reset - price); sold = held + price; reset = max(reset, prevSold);</code></td>
+          <td>3 state variables ($O(1)$ space)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+<section class="v2-module code-skeletons-section" id="v2-code-skeletons" style="background: linear-gradient(145deg, rgba(99, 102, 241, 0.15), rgba(15, 23, 42, 0.95)); border: 2px solid rgba(99, 102, 241, 0.45); border-radius: 20px; padding: 36px 30px; margin: 45px 0; box-shadow: 0 20px 45px rgba(0,0,0,0.5), 0 0 35px rgba(99, 102, 241, 0.15);">
+  <span class="tag tag-phase" style="background: rgba(99, 102, 241, 0.25); color: #c7d2fe;">🧱 10 UNIVERSAL SKELETONS</span>
+  <h2 style="font-size: 28px; font-weight: 900; color: #f8fafc; margin: 10px 0 8px 0;">The Master Code Boilerplate Skeletons</h2>
+  <p style="color: #cbd5e1; font-size: 15px; margin-bottom: 24px; line-height: 1.6;">
+    Never freeze on a blank screen. These 10 fill-in-the-blanks boilerplate templates cover <strong>90% of all interview questions</strong>. Memorize the invariant and structure; adapt the inner condition.
+  </p>
+
+  <hr style="border-color: rgba(99, 102, 241, 0.2); margin: 20px 0 28px 0;">
+
+  <!-- Skeleton 1: Two Pointers -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 18px 0 8px 0;">1. Converging Two Pointers Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Two Sum II, 3Sum, Container With Most Water, Trapping Rain Water, Valid Palindrome.</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function twoPointersSkeleton(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  let result = 0;
+
+  while (left < right) {
+    // 1. Evaluate current window
+    const currentVal = /* evaluate arr[left] and arr[right] */ (arr[left] + arr[right]);
+
+    if (currentVal === /* TARGET */ 0) {
+      // Found answer, record and shift
+      result = [left, right];
+      left++;
+      right--;
+    } else if (currentVal < /* TARGET */ 0) {
+      // Need larger value -> advance left
+      left++;
+    } else {
+      // Need smaller value -> decrement right
+      right--;
+    }
+  }
+
+  return result;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 2: Sliding Window -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">2. Dynamic Sliding Window (Shrinkable) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Longest Substring Without Repeating, Minimum Window Substring, Max Consecutive Ones III.</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function slidingWindowSkeleton(arr) {
+  let left = 0;
+  let maxLen = 0;
+  const state = new Map(); // frequency or seen map
+
+  for (let right = 0; right < arr.length; right++) {
+    // 1. Expand window: include arr[right] in state
+    const char = arr[right];
+    state.set(char, (state.get(char) || 0) + 1);
+
+    // 2. Shrink window while invalid
+    while (/* INVALID CONDITION: e.g. state.get(char) > 1 */ false) {
+      const leftChar = arr[left];
+      state.set(leftChar, state.get(leftChar) - 1);
+      if (state.get(leftChar) === 0) state.delete(leftChar);
+      left++;
+    }
+
+    // 3. Window [left, right] is now valid! Update answer
+    maxLen = Math.max(maxLen, right - left + 1);
+  }
+
+  return maxLen;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 3: Binary Search on Answer -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">3. Binary Search on Answer (Monotonic Predicate) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Koko Eating Bananas (#875), Capacity to Ship Packages (#1011), Split Array Largest Sum (#410).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function binarySearchAnswerSkeleton(nums, k) {
+  let low = /* MIN POSSIBLE ANSWER, e.g. 1 */ 1;
+  let high = /* MAX POSSIBLE ANSWER, e.g. Math.max(...nums) */ 1000000;
+  let ans = high;
+
+  // Monotonic Predicate Helper: Can we achieve the goal with candidate 'mid'?
+  function isValid(mid) {
+    let count = 0;
+    for (const x of nums) {
+      // evaluate cost/work using mid
+    }
+    return count <= k; // returns true or false
+  }
+
+  while (low <= high) {
+    const mid = low + Math.floor((high - low) / 2);
+
+    if (isValid(mid)) {
+      ans = mid;         // Record potential optimal answer
+      high = mid - 1;    // Try finding an even smaller valid answer
+    } else {
+      low = mid + 1;     // Mid was too small/invalid -> increase search range
+    }
+  }
+
+  return ans;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 4: Monotonic Stack -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">4. Monotonic Stack (Next Greater Element) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Daily Temperatures (#739), Next Greater Element (#496), Largest Rectangle in Histogram (#84).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function monotonicStackSkeleton(arr) {
+  const n = arr.length;
+  const result = new Array(n).fill(-1);
+  const stack = []; // Stores INDICES, maintaining decreasing values from bottom to top
+
+  for (let i = 0; i < n; i++) {
+    // While current element is GREATER than top of stack -> Top's next greater is arr[i]!
+    while (stack.length > 0 && arr[i] > arr[stack[stack.length - 1]]) {
+      const topIdx = stack.pop();
+      result[topIdx] = arr[i]; // or i - topIdx for distance
+    }
+    stack.push(i);
+  }
+
+  return result;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 5: Fast & Slow Pointers -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">5. Fast &amp; Slow Pointers (Floyd's Cycle) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Linked List Cycle I & II (#141, #142), Find the Duplicate Number (#287), Middle of Linked List (#876).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function floydCycleSkeleton(head) {
+  if (!head || !head.next) return null;
+
+  let slow = head;
+  let fast = head;
+
+  // Phase 1: Detect cycle intersection
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+
+    if (slow === fast) {
+      // Cycle detected!
+      // Phase 2: Find cycle entry point
+      let entry = head;
+      while (entry !== slow) {
+        entry = entry.next;
+        slow = slow.next;
+      }
+      return entry; // Cycle start node!
+    }
+  }
+
+  return null; // No cycle
+}</code></pre>
+</div>
+
+  <!-- Skeleton 6: Universal Backtracking -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">6. Universal Backtracking Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Subsets (#78), Permutations (#46), Combination Sum (#39), Word Search (#79), N-Queens (#51).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function backtrackSkeleton(nums) {
+  const result = [];
+  // Sort nums first if skipping duplicate elements is required: nums.sort((a,b)=>a-b);
+
+  function backtrack(startIndex, currentPath) {
+    // 1. Base Case: If goal state reached, copy path and return
+    if (/* GOAL REACHED */ true) {
+      result.push([...currentPath]); // Always shallow copy!
+    }
+
+    // 2. Iterate through choices
+    for (let i = startIndex; i < nums.length; i++) {
+      // Prune duplicate choices: if (i > startIndex && nums[i] === nums[i-1]) continue;
+
+      // Make choice
+      currentPath.push(nums[i]);
+
+      // Recurse down state tree
+      backtrack(i + 1, currentPath);
+
+      // Undo choice (Backtrack)
+      currentPath.pop();
+    }
+  }
+
+  backtrack(0, []);
+  return result;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 7: 2D Grid BFS -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">7. 2D Grid / Graph Level-Order BFS Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Rotting Oranges (#994), Shortest Path in Binary Matrix (#1091), Number of Islands (#200), Word Ladder (#127).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function gridBfsSkeleton(grid) {
+  const R = grid.length;
+  const C = grid[0].length;
+  const queue = [];
+  let head = 0; // O(1) queue pointer instead of slow shift()!
+
+  // 4 Cardinal Directions: Up, Down, Left, Right
+  const DIRS = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+  // 1. Enqueue starting cells
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (grid[r][c] === /* START CRITERIA */ 2) {
+        queue.push([r, c]);
+      }
+    }
+  }
+
+  let steps = 0;
+
+  // 2. Level-by-level BFS traversal
+  while (head < queue.length) {
+    const levelSize = queue.length - head;
+
+    for (let i = 0; i < levelSize; i++) {
+      const [r, c] = queue[head++];
+
+      for (const [dr, dc] of DIRS) {
+        const nr = r + dr;
+        const nc = c + dc;
+
+        // Check bounds & valid unvisited cell
+        if (nr >= 0 && nr < R && nc >= 0 && nc < C && grid[nr][nc] === 1) {
+          grid[nr][nc] = 2; // Mark visited in-place
+          queue.push([nr, nc]);
+        }
+      }
+    }
+
+    if (head < queue.length) steps++;
+  }
+
+  return steps;
+}</code></pre>
+</div>
+
+  <!-- Skeleton 8: Topological Sort -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">8. Topological Sort (Kahn's Algorithm BFS) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Course Schedule I & II (#207, #210), Alien Dictionary (#269), Build Order.</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function topologicalSortSkeleton(numCourses, prerequisites) {
+  const adj = Array.from({ length: numCourses }, () => []);
+  const inDegree = new Array(numCourses).fill(0);
+
+  // 1. Build adjacency list & count in-degrees
+  for (const [dest, src] of prerequisites) {
+    adj[src].push(dest);
+    inDegree[dest]++;
+  }
+
+  // 2. Enqueue all nodes with in-degree 0 (no prerequisites)
+  const queue = [];
+  let head = 0;
+  for (let i = 0; i < numCourses; i++) {
+    if (inDegree[i] === 0) queue.push(i);
+  }
+
+  const order = [];
+
+  // 3. Process BFS
+  while (head < queue.length) {
+    const u = queue[head++];
+    order.push(u);
+
+    for (const v of adj[u]) {
+      inDegree[v]--;
+      if (inDegree[v] === 0) {
+        queue.push(v);
+      }
+    }
+  }
+
+  // If processed all nodes -> Valid DAG! Otherwise -> Cycle exists!
+  return order.length === numCourses ? order : [];
+}</code></pre>
+</div>
+
+  <!-- Skeleton 9: Disjoint Set Union (DSU) -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">9. Disjoint Set Union (DSU / Union-Find) Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Number of Provinces (#547), Redundant Connection (#684), Kruskal's MST, Accounts Merge (#721).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">class DSU {
+  constructor(n) {
+    this.parent = Array.from({ length: n }, (_, i) => i);
+    this.rank = new Array(n).fill(1);
+    this.components = n;
+  }
+
+  // Find with Path Compression: O(α(N)) ≈ O(1)
+  find(x) {
+    if (this.parent[x] !== x) {
+      this.parent[x] = this.find(this.parent[x]);
+    }
+    return this.parent[x];
+  }
+
+  // Union by Rank
+  union(x, y) {
+    const rootX = this.find(x);
+    const rootY = this.find(y);
+    if (rootX === rootY) return false; // Cycle detected!
+
+    if (this.rank[rootX] < this.rank[rootY]) {
+      this.parent[rootX] = rootY;
+    } else if (this.rank[rootX] > this.rank[rootY]) {
+      this.parent[rootY] = rootX;
+    } else {
+      this.parent[rootY] = rootX;
+      this.rank[rootX]++;
+    }
+
+    this.components--;
+    return true; // Successfully merged
+  }
+}</code></pre>
+</div>
+
+  <!-- Skeleton 10: 0/1 Knapsack 1D Space DP -->
+  <h3 style="color: #67e8f9; font-size: 18px; margin: 28px 0 8px 0;">10. 0/1 Knapsack 1D Space-Optimized DP Skeleton</h3>
+  <p style="color: #94a3b8; font-size: 13.5px; margin-bottom: 8px;"><strong>Use For:</strong> Partition Equal Subset Sum (#416), Target Sum (#494), Ones and Zeroes (#474).</p>
+<div class="code-card">
+  <div class="code-card-topbar">
+    <div class="mac-controls">
+      <span class="mac-dot mac-red"></span>
+      <span class="mac-dot mac-yellow"></span>
+      <span class="mac-dot mac-green"></span>
+    </div>
+    <div class="code-meta-badge">
+      <span class="code-icon">⚡</span>
+      <span class="code-lang-name">JAVASCRIPT</span>
+    </div>
+    <button class="copy-btn" onclick="copySnippet(this)" aria-label="Copy code">
+      <svg class="copy-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre class="line-numbers"><code class="language-javascript">function knapsack01Skeleton(weights, values, capacity) {
+  // dp[w] stores max value achievable with capacity w
+  const dp = new Array(capacity + 1).fill(0);
+
+  for (let i = 0; i < weights.length; i++) {
+    const wt = weights[i];
+    const val = values[i];
+
+    // CRITICAL: Iterate DOWNWARDS from capacity down to wt!
+    // This guarantees each item is used AT MOST ONCE (prevents reuse).
+    for (let w = capacity; w >= wt; w--) {
+      dp[w] = Math.max(dp[w], dp[w - wt] + val);
+    }
+  }
+
+  return dp[capacity];
+}</code></pre>
+</div>
+</section>
+
+
+<hr>
 <h1 id="master-index" class="heading-anchor"><a href="#master-index" class="anchor-link">#</a>📖 MASTER INDEX</h1>
 <h2 id="complete-roadmap-at-a-glance" class="heading-anchor"><a href="#complete-roadmap-at-a-glance" class="anchor-link">#</a>Complete Roadmap at a Glance</h2>
 <div class="table-container"><table>

@@ -1,6 +1,6 @@
 # Data Structures & Algorithms (DSA) in JavaScript — Comprehensive Guide
 
-This guide provides an end-to-end reference for Data Structures and Algorithms implemented natively in JavaScript (ES6+).
+This guide provides an end-to-end reference for Data Structures and Algorithms implemented natively in JavaScript (ES6+), following the 48-phase learning roadmap.
 
 ---
 
@@ -56,9 +56,35 @@ This guide provides an end-to-end reference for Data Structures and Algorithms i
 
 ---
 
-## 1. Big-O Notation & Complexity Analysis
+## 1. JavaScript Fundamentals
+Basic programming constructs in JavaScript for problem solving: variables (`const`, `let`), primitive types, loops (`for`, `while`, `for...of`), conditionals, functions, and block scope.
 
-Big-O measures the upper bound of runtime or space required by an algorithm as input size $N$ grows.
+```javascript
+// Basic control structures
+function isEven(num) {
+  return num % 2 === 0;
+}
+```
+
+---
+
+## 2. JS for DSA
+Key JavaScript objects and built-in features used for data structure implementations:
+- Arrays: `[]`
+- Key-Value Maps: `Map`
+- Sets: `Set`
+- Objects: `{}`
+- Strings: Immutable sequences of UTF-16 code units
+
+```javascript
+const frequencyMap = new Map();
+const uniqueElements = new Set([1, 2, 2, 3]);
+```
+
+---
+
+## 3. Time & Space Complexity
+Big-O notation measures algorithmic bounds as input size $N$ grows.
 
 | Big-O | Name | Example |
 | :--- | :--- | :--- |
@@ -72,68 +98,343 @@ Big-O measures the upper bound of runtime or space required by an algorithm as i
 
 ---
 
-## 2. JavaScript Data Structure Cheat Sheet
-
-| Data Structure | Built-in JS Equivalent | Time: Access | Time: Search | Time: Insert | Time: Delete |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Array** | `[]` | $O(1)$ | $O(N)$ | $O(1)$ end / $O(N)$ start | $O(1)$ end / $O(N)$ start |
-| **Stack** | `[]` (push/pop) | $O(N)$ | $O(N)$ | $O(1)$ | $O(1)$ |
-| **Queue** | Custom LinkedList / Array | $O(N)$ | $O(N)$ | $O(1)$ | $O(1)$ (LinkedList) / $O(N)$ (Array `shift`) |
-| **Linked List** | Custom Class | $O(N)$ | $O(N)$ | $O(1)$ (known node) | $O(1)$ (known node) |
-| **Hash Table** | `Map` or `{}` | N/A | $O(1)$ avg | $O(1)$ avg | $O(1)$ avg |
-| **Set** | `Set` | N/A | $O(1)$ avg | $O(1)$ avg | $O(1)$ avg |
-| **BST** | Custom Class | $O(\log N)$ | $O(\log N)$ | $O(\log N)$ | $O(\log N)$ |
-| **Min/Max Heap** | Custom Class | $O(1)$ (min/max) | $O(N)$ | $O(\log N)$ | $O(\log N)$ |
-
----
-
-## 3. Linear Data Structures
-
-### Arrays & Strings
-JavaScript arrays are dynamic. Useful methods for DSA:
-- `push()`, `pop()`: $O(1)$
-- `shift()`, `unshift()`: $O(N)$
-- `splice()`: $O(N)$
-- `slice()`: $O(N)$
-
----
-
-### Stacks
-Last-In, First-Out (LIFO).
+## 4. Math & Number Theory
+Common algorithms involving numbers, prime testing, GCD, LCM, and modulo arithmetic.
 
 ```javascript
-class Stack {
-  constructor() {
-    this.items = [];
+// Greatest Common Divisor (Euclidean Algorithm)
+function gcd(a, b) {
+  while (b) {
+    [a, b] = [b, a % b];
+  }
+  return a;
+}
+
+// Sieve of Eratosthenes (Primes up to N)
+function sieveOfEratosthenes(n) {
+  const isPrime = new Array(n + 1).fill(true);
+  isPrime[0] = isPrime[1] = false;
+  for (let p = 2; p * p <= n; p++) {
+    if (isPrime[p]) {
+      for (let i = p * p; i <= n; i += p) {
+        isPrime[i] = false;
+      }
+    }
+  }
+  return isPrime;
+}
+```
+
+---
+
+## 5. Recursion Basics
+Breaking problems into smaller subproblems using base cases and call stacks.
+
+```javascript
+function factorial(n) {
+  if (n <= 1) return 1; // Base case
+  return n * factorial(n - 1);
+}
+```
+
+---
+
+## 6. Arrays
+Linear collections offering contiguous memory allocation concepts and built-in operations.
+
+```javascript
+// Kadane's Algorithm for Maximum Subarray Sum
+function maxSubArray(nums) {
+  let maxSoFar = nums[0];
+  let currentMax = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    currentMax = Math.max(nums[i], currentMax + nums[i]);
+    maxSoFar = Math.max(maxSoFar, currentMax);
+  }
+  return maxSoFar;
+}
+```
+
+---
+
+## 7. Strings
+Common operations including character traversal, substring extraction, sliding, and reverse logic.
+
+```javascript
+function isPalindrome(s) {
+  const clean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  let left = 0, right = clean.length - 1;
+  while (left < right) {
+    if (clean[left++] !== clean[right--]) return false;
+  }
+  return true;
+}
+```
+
+---
+
+## 8. Hashing
+Utilizing key-value pairs (`Map` or `{}`) and `Set` to reduce $O(N)$ lookup costs to $O(1)$ average time.
+
+```javascript
+function twoSum(nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    map.set(nums[i], i);
+  }
+  return [];
+}
+```
+
+---
+
+## 9. Two Pointers
+Iterating pointers from opposing ends or varying speeds across structured/sorted data.
+
+```javascript
+function twoSumSorted(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    const sum = arr[left] + arr[right];
+    if (sum === target) return [left, right];
+    if (sum < target) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+  return [-1, -1];
+}
+```
+
+---
+
+## 10. Sliding Window
+Maintaining a window frame over sequential data (fixed size or dynamic boundary).
+
+```javascript
+// Maximum sum subarray of size K (Fixed Window)
+function maxSubarraySum(arr, k) {
+  if (arr.length < k) return null;
+  let maxSum = 0, windowSum = 0;
+  for (let i = 0; i < k; i++) windowSum += arr[i];
+  maxSum = windowSum;
+  for (let i = k; i < arr.length; i++) {
+    windowSum += arr[i] - arr[i - k];
+    maxSum = Math.max(maxSum, windowSum);
+  }
+  return maxSum;
+}
+
+// Longest Substring Without Repeating Characters (Dynamic Window)
+function lengthOfLongestSubstring(s) {
+  const charMap = new Map();
+  let maxLength = 0, left = 0;
+  for (let right = 0; right < s.length; right++) {
+    const char = s[right];
+    if (charMap.has(char) && charMap.get(char) >= left) {
+      left = charMap.get(char) + 1;
+    }
+    charMap.set(char, right);
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+  return maxLength;
+}
+```
+
+---
+
+## 11. Prefix Sum
+Precomputing cumulative sums to process range queries in $O(1)$ time.
+
+```javascript
+class NumArray {
+  constructor(nums) {
+    this.prefix = new Array(nums.length + 1).fill(0);
+    for (let i = 0; i < nums.length; i++) {
+      this.prefix[i + 1] = this.prefix[i] + nums[i];
+    }
   }
 
-  push(element) {
-    this.items.push(element);
-  }
-
-  pop() {
-    if (this.isEmpty()) return null;
-    return this.items.pop();
-  }
-
-  peek() {
-    return this.items[this.items.length - 1] || null;
-  }
-
-  isEmpty() {
-    return this.items.length === 0;
-  }
-
-  size() {
-    return this.items.length;
+  sumRange(left, right) {
+    return this.prefix[right + 1] - this.prefix[left];
   }
 }
 ```
 
 ---
 
-### Queues & Deques
-First-In, First-Out (FIFO). Using a Linked List for $O(1)$ operations:
+## 12. Sorting
+Elementary comparison-based sorting algorithms ($O(N^2)$ average/worst case).
+
+```javascript
+function bubbleSort(arr) {
+  const n = arr.length;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+}
+```
+
+---
+
+## 13. Advanced Sorting
+Divide and conquer and heap-based sorting algorithms ($O(N \log N)$ runtime).
+
+```javascript
+// Merge Sort
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
+}
+
+function merge(left, right) {
+  const result = [];
+  let i = 0, j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] <= right[j]) result.push(left[i++]);
+    else result.push(right[j++]);
+  }
+  return [...result, ...left.slice(i), ...right.slice(j)];
+}
+
+// Quick Sort
+function quickSort(arr) {
+  if (arr.length <= 1) return arr;
+  const pivot = arr[arr.length - 1];
+  const left = [], right = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < pivot) left.push(arr[i]);
+    else right.push(arr[i]);
+  }
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}
+```
+
+---
+
+## 14. Binary Search
+Dividing target search space in half each step ($O(\log N)$) on sorted data.
+
+```javascript
+function binarySearch(arr, target) {
+  let left = 0, right = arr.length - 1;
+  while (left <= right) {
+    const mid = Math.floor(left + (right - left) / 2);
+    if (arr[mid] === target) return mid;
+    if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}
+```
+
+---
+
+## 15. Binary Search on Answer
+Applying binary search over a range of valid answers/parameters to find optimal boundary values.
+
+```javascript
+// Example: Find smallest divisor given a threshold
+function smallestDivisor(nums, threshold) {
+  let left = 1, right = Math.max(...nums);
+  
+  function computeSum(divisor) {
+    return nums.reduce((sum, val) => sum + Math.ceil(val / divisor), 0);
+  }
+
+  while (left < right) {
+    const mid = Math.floor(left + (right - left) / 2);
+    if (computeSum(mid) <= threshold) {
+      right = mid;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return left;
+}
+```
+
+---
+
+## 16. Linked List
+Linear collections linked via node references.
+
+```javascript
+class ListNode {
+  constructor(val = 0, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  reverse() {
+    let prev = null, curr = this.head;
+    while (curr) {
+      let nextTemp = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = nextTemp;
+    }
+    this.head = prev;
+  }
+}
+```
+
+---
+
+## 17. Stack
+Last-In, First-Out (LIFO) data structure and Monotonic Stack patterns.
+
+```javascript
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+  push(element) { this.items.push(element); }
+  pop() { return this.isEmpty() ? null : this.items.pop(); }
+  peek() { return this.items[this.items.length - 1] || null; }
+  isEmpty() { return this.items.length === 0; }
+}
+
+// Valid Parentheses
+function isValidParentheses(s) {
+  const stack = [];
+  const map = { ')': '(', '}': '{', ']': '[' };
+  for (const char of s) {
+    if (char in map) {
+      if (stack.pop() !== map[char]) return false;
+    } else {
+      stack.push(char);
+    }
+  }
+  return stack.length === 0;
+}
+```
+
+---
+
+## 18. Queue
+First-In, First-Out (FIFO) data structures and Deques (Double-Ended Queue).
 
 ```javascript
 class QueueNode {
@@ -169,800 +470,74 @@ class Queue {
     this.size--;
     return val;
   }
-
-  peek() {
-    return this.head ? this.head.value : null;
-  }
-
-  isEmpty() {
-    return this.size === 0;
-  }
-}
-```
-
-### Deque (Double-Ended Queue)
-A deque allows insertion and deletion from both ends in O(1) time.
-
-```javascript
-class DequeNode {
-  constructor(value) {
-    this.value = value;
-    this.prev = null;
-    this.next = null;
-  }
-}
-
-class Deque {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
-
-  // Add to front
-  addFront(value) {
-    const node = new DequeNode(value);
-    if (!this.head) {
-      this.head = this.tail = node;
-    } else {
-      node.next = this.head;
-      this.head.prev = node;
-      this.head = node;
-    }
-    this.size++;
-  }
-
-  // Add to back
-  addBack(value) {
-    const node = new DequeNode(value);
-    if (!this.tail) {
-      this.head = this.tail = node;
-    } else {
-      this.tail.next = node;
-      node.prev = this.tail;
-      this.tail = node;
-    }
-    this.size++;
-  }
-
-  // Remove from front
-  removeFront() {
-    if (!this.head) return null;
-    const value = this.head.value;
-    this.head = this.head.next;
-    if (this.head) {
-      this.head.prev = null;
-    } else {
-      this.tail = null;
-    }
-    this.size--;
-    return value;
-  }
-
-  // Remove from back
-  removeBack() {
-    if (!this.tail) return null;
-    const value = this.tail.value;
-    this.tail = this.tail.prev;
-    if (this.tail) {
-      this.tail.next = null;
-    } else {
-      this.head = null;
-    }
-    this.size--;
-    return value;
-  }
-
-  // Peek front
-  peekFront() {
-    return this.head ? this.head.value : null;
-  }
-
-  // Peek back
-  peekBack() {
-    return this.tail ? this.tail.value : null;
-  }
-
-  isEmpty() {
-    return this.size === 0;
-  }
-
-  getSize() {
-    return this.size;
-  }
 }
 ```
 
 ---
 
-### Singly & Doubly Linked Lists
-
-#### Singly Linked List Implementation:
-```javascript
-class ListNode {
-  constructor(val = 0, next = null) {
-    this.val = val;
-    this.next = next;
-  }
-}
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.size = 0;
-  }
-
-  insertAtHead(val) {
-    this.head = new ListNode(val, this.head);
-    this.size++;
-  }
-
-  insertAtTail(val) {
-    const newNode = new ListNode(val);
-    if (!this.head) {
-      this.head = newNode;
-    } else {
-      let current = this.head;
-      while (current.next) {
-        current = current.next;
-      }
-      current.next = newNode;
-    }
-    this.size++;
-  }
-
-  reverse() {
-    let prev = null;
-    let curr = this.head;
-    while (curr) {
-      let nextTemp = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = nextTemp;
-    }
-    this.head = prev;
-  }
-}
-```
-
-##### Doubly Linked List Implementation
-```javascript
-class DListNode {
-  constructor(val, prev = null, next = null) {
-    this.val = val;
-    this.prev = prev;
-    this.next = next;
-  }
-}
-
-class DoublyLinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
-
-  append(val) {
-    const newNode = new DListNode(val);
-    if (!this.head) {
-      this.head = this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      newNode.prev = this.tail;
-      this.tail = newNode;
-    }
-    this.size++;
-  }
-
-  prepend(val) {
-    const newNode = new DListNode(val);
-    if (!this.head) {
-      this.head = this.tail = newNode;
-    } else {
-      newNode.next = this.head;
-      this.head.prev = newNode;
-      this.head = newNode;
-    }
-    this.size++;
-  }
-
-  getSize() {
-    return this.size;
-  }
-
-  contains(val) {
-    let current = this.head;
-    while (current) {
-      if (current.val === val) return true;
-      current = current.next;
-    }
-    return false;
-  }
-}
-```
-
----
-
-## 4. Non-Linear Data Structures
-
-### Hash Tables (Objects & Maps)
-Use `Map` when keys are non-strings or order matters, or when frequent insertions/deletions occur.
+## 19. Hash Table
+Implementation details behind hashing key-value mappings and handling collisions (separate chaining, open addressing).
 
 ```javascript
-const map = new Map();
-map.set('key', 'value'); // O(1)
-map.get('key');        // O(1)
-map.has('key');        // O(1)
-map.delete('key');     // O(1)
-```
-
----
-
-### Trees & Binary Search Trees (BST)
-
-```javascript
-class TreeNode {
-  constructor(val = 0, left = null, right = null) {
-    this.val = val;
-    this.left = left;
-    this.right = right;
-  }
-}
-
-class BinarySearchTree {
-  constructor() {
-    this.root = null;
+class SimpleHashTable {
+  constructor(size = 53) {
+    this.keyMap = new Array(size);
   }
 
-  insert(val) {
-    const newNode = new TreeNode(val);
-    if (!this.root) {
-      this.root = newNode;
-      return;
+  _hash(key) {
+    let total = 0;
+    const PRIME = 31;
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      total = (total * PRIME + key.charCodeAt(i)) % this.keyMap.length;
     }
-    let current = this.root;
-    while (true) {
-      if (val < current.val) {
-        if (!current.left) {
-          current.left = newNode;
-          return;
-        }
-        current = current.left;
-      } else {
-        if (!current.right) {
-          current.right = newNode;
-          return;
-        }
-        current = current.right;
+    return total;
+  }
+
+  set(key, value) {
+    const index = this._hash(key);
+    if (!this.keyMap[index]) this.keyMap[index] = [];
+    this.keyMap[index].push([key, value]);
+  }
+
+  get(key) {
+    const index = this._hash(key);
+    if (this.keyMap[index]) {
+      for (let pair of this.keyMap[index]) {
+        if (pair[0] === key) return pair[1];
       }
     }
-  }
-
-  // In-order traversal: Left -> Node -> Right (Sorted order for BST)
-  inOrder(node = this.root, result = []) {
-    if (node) {
-      this.inOrder(node.left, result);
-      result.push(node.val);
-      this.inOrder(node.right, result);
-    }
-    return result;
-  }
-
-  // Level-order traversal (BFS)
-  bfs() {
-    const result = [];
-    if (!this.root) return result;
-    const queue = [this.root];
-    while (queue.length > 0) {
-      const current = queue.shift();
-      result.push(current.val);
-      if (current.left) queue.push(current.left);
-      if (current.right) queue.push(current.right);
-    }
-    return result;
+    return undefined;
   }
 }
 ```
 
 ---
 
-### Binary Heaps & Priority Queues
-
-Min-Heap implementation:
-```javascript
-class MinHeap {
-  constructor() {
-    this.heap = [];
-  }
-
-  getParentIndex(i) { return Math.floor((i - 1) / 2); }
-  getLeftChildIndex(i) { return 2 * i + 1; }
-  getRightChildIndex(i) { return 2 * i + 2; }
-
-  swap(i1, i2) {
-    [this.heap[i1], this.heap[i2]] = [this.heap[i2], this.heap[i1]];
-  }
-
-  push(val) {
-    this.heap.push(val);
-    this.heapifyUp();
-  }
-
-  heapifyUp() {
-    let index = this.heap.length - 1;
-    while (
-      index > 0 &&
-      this.heap[index] < this.heap[this.getParentIndex(index)]
-    ) {
-      const parentIdx = this.getParentIndex(index);
-      this.swap(index, parentIdx);
-      index = parentIdx;
-    }
-  }
-
-  pop() {
-    if (this.heap.length === 0) return null;
-    if (this.heap.length === 1) return this.heap.pop();
-    const item = this.heap[0];
-    this.heap[0] = this.heap.pop();
-    this.heapifyDown();
-    return item;
-  }
-
-  heapifyDown() {
-    let index = 0;
-    while (this.getLeftChildIndex(index) < this.heap.length) {
-      let smallerChildIndex = this.getLeftChildIndex(index);
-      const rightChildIdx = this.getRightChildIndex(index);
-      if (
-        rightChildIdx < this.heap.length &&
-        this.heap[rightChildIdx] < this.heap[smallerChildIndex]
-      ) {
-        smallerChildIndex = rightChildIdx;
-      }
-
-      if (this.heap[index] <= this.heap[smallerChildIndex]) break;
-
-      this.swap(index, smallerChildIndex);
-      index = smallerChildIndex;
-    }
-  }
-
-  peek() {
-    return this.heap[0] || null;
-  }
-}
-```
-
-### Priority Queue
-Built on top of the Min-Heap, a Priority Queue dequeues elements by priority.
+## 20. Recursion Advanced
+Generating combinations, power sets, and sub-sequences using decision trees.
 
 ```javascript
-class PriorityQueue {
-  constructor(comparator = (a, b) => a - b) {
-    this.heap = [];
-    this.compare = comparator;
-  }
-
-  getParentIndex(i) { return Math.floor((i - 1) / 2); }
-  getLeftChildIndex(i) { return 2 * i + 1; }
-  getRightChildIndex(i) { return 2 * i + 2; }
-
-  swap(i1, i2) {
-    [this.heap[i1], this.heap[i2]] = [this.heap[i2], this.heap[i1]];
-  }
-
-  size() {
-    return this.heap.length;
-  }
-
-  isEmpty() {
-    return this.heap.length === 0;
-  }
-
-  peek() {
-    return this.heap[0] || null;
-  }
-
-  push(val) {
-    this.heap.push(val);
-    this.heapifyUp();
-  }
-
-  heapifyUp() {
-    let index = this.heap.length - 1;
-    while (
-      index > 0 &&
-      this.compare(this.heap[index], this.heap[this.getParentIndex(index)]) < 0
-    ) {
-      const parentIdx = this.getParentIndex(index);
-      this.swap(index, parentIdx);
-      index = parentIdx;
-    }
-  }
-
-  pop() {
-    if (this.heap.length === 0) return null;
-    if (this.heap.length === 1) return this.heap.pop();
-    const item = this.heap[0];
-    this.heap[0] = this.heap.pop();
-    this.heapifyDown();
-    return item;
-  }
-
-  heapifyDown() {
-    let index = 0;
-    while (this.getLeftChildIndex(index) < this.heap.length) {
-      let priorityChildIndex = this.getLeftChildIndex(index);
-      const rightChildIdx = this.getRightChildIndex(index);
-      if (
-        rightChildIdx < this.heap.length &&
-        this.compare(this.heap[rightChildIdx], this.heap[priorityChildIndex]) < 0
-      ) {
-        priorityChildIndex = rightChildIdx;
-      }
-
-      if (this.compare(this.heap[index], this.heap[priorityChildIndex]) <= 0) break;
-
-      this.swap(index, priorityChildIndex);
-      index = priorityChildIndex;
-    }
-  }
-}
-```
-
----
-
-### Graphs
-Represented using Adjacency List:
-
-```javascript
-class Graph {
-  constructor() {
-    this.adjacencyList = new Map();
-  }
-
-  addVertex(vertex) {
-    if (!this.adjacencyList.has(vertex)) {
-      this.adjacencyList.set(vertex, []);
-    }
-  }
-
-  addEdge(v1, v2) {
-    this.addVertex(v1);
-    this.addVertex(v2);
-    this.adjacencyList.get(v1).push(v2);
-    this.adjacencyList.get(v2).push(v1); // Undirected graph
-  }
-
-  bfs(start) {
-    const visited = new Set([start]);
-    const queue = [start];
-    const result = [];
-
-    while (queue.length > 0) {
-      const vertex = queue.shift();
-      result.push(vertex);
-
-      for (const neighbor of this.adjacencyList.get(vertex) || []) {
-        if (!visited.has(neighbor)) {
-          visited.add(neighbor);
-          queue.push(neighbor);
-        }
-      }
-    }
-    return result;
-  }
-
-  dfs(start) {
-    const visited = new Set();
-    const result = [];
-    const adj = this.adjacencyList;
-
-    function traverse(vertex) {
-      if (!vertex) return;
-      visited.add(vertex);
-      result.push(vertex);
-
-      for (const neighbor of adj.get(vertex) || []) {
-        if (!visited.has(neighbor)) {
-          traverse(neighbor);
-        }
-      }
-    }
-
-    traverse(start);
-    return result;
-  }
-}
-```
-
----
-
-### Tries (Prefix Trees)
-
-```javascript
-class TrieNode {
-  constructor() {
-    this.children = {};
-    this.isEndOfWord = false;
-  }
-}
-
-class Trie {
-  constructor() {
-    this.root = new TrieNode();
-  }
-
-  insert(word) {
-    let current = this.root;
-    for (const char of word) {
-      if (!current.children[char]) {
-        current.children[char] = new TrieNode();
-      }
-      current = current.children[char];
-    }
-    current.isEndOfWord = true;
-  }
-
-  search(word) {
-    let current = this.root;
-    for (const char of word) {
-      if (!current.children[char]) return false;
-      current = current.children[char];
-    }
-    return current.isEndOfWord;
-  }
-
-  startsWith(prefix) {
-    let current = this.root;
-    for (const char of prefix) {
-      if (!current.children[char]) return false;
-      current = current.children[char];
-    }
-    return true;
-  }
-}
-```
-
----
-
-### Disjoint Set Union (DSU / Union-Find)
-
-```javascript
-class UnionFind {
-  constructor(size) {
-    this.parent = Array.from({ length: size }, (_, i) => i);
-    this.rank = new Array(size).fill(0);
-  }
-
-  find(i) {
-    if (this.parent[i] === i) return i;
-    // Path compression
-    this.parent[i] = this.find(this.parent[i]);
-    return this.parent[i];
-  }
-
-  union(i, j) {
-    const rootI = this.find(i);
-    const rootJ = this.find(j);
-
-    if (rootI !== rootJ) {
-      // Union by rank
-      if (this.rank[rootI] < this.rank[rootJ]) {
-        this.parent[rootI] = rootJ;
-      } else if (this.rank[rootI] > this.rank[rootJ]) {
-        this.parent[rootJ] = rootI;
-      } else {
-        this.parent[rootJ] = rootI;
-        this.rank[rootI]++;
-      }
-      return true;
-    }
-    return false; // Already in same set (cycle detected)
-  }
-}
-```
-
-
----
-
-## 5. Core Algorithmic Patterns
-
-### Two Pointers
-Used for sorted arrays, searching pairs, or reversing elements in $O(N)$ time with $O(1)$ space.
-
-```javascript
-// Target Sum in a Sorted Array
-function twoSumSorted(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-
-  while (left < right) {
-    const sum = arr[left] + arr[right];
-    if (sum === target) return [left, right];
-    if (sum < target) {
-      left++;
-    } else {
-      right--;
-    }
-  }
-  return [-1, -1];
-}
-```
-
----
-
-### Sliding Window
-Used for contiguous subarray or substring problems (fixed or dynamic window size).
-
-```javascript
-// Maximum sum subarray of size K (Fixed Window)
-function maxSubarraySum(arr, k) {
-  if (arr.length < k) return null;
-
-  let maxSum = 0;
-  let windowSum = 0;
-
-  for (let i = 0; i < k; i++) {
-    windowSum += arr[i];
-  }
-  maxSum = windowSum;
-
-  for (let i = k; i < arr.length; i++) {
-    windowSum += arr[i] - arr[i - k];
-    maxSum = Math.max(maxSum, windowSum);
-  }
-
-  return maxSum;
-}
-
-// Longest Substring Without Repeating Characters (Dynamic Window)
-function lengthOfLongestSubstring(s) {
-  const charMap = new Map();
-  let maxLength = 0;
-  let left = 0;
-
-  for (let right = 0; right < s.length; right++) {
-    const char = s[right];
-    if (charMap.has(char) && charMap.get(char) >= left) {
-      left = charMap.get(char) + 1;
-    }
-    charMap.set(char, right);
-    maxLength = Math.max(maxLength, right - left + 1);
-  }
-
-  return maxLength;
-}
-```
-
----
-
-### Fast & Slow Pointers (Floyd's Cycle)
-Used to detect cycles in linked lists or find the middle node in a single pass.
-
-```javascript
-function hasCycle(head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) return true;
-  }
-  return false;
-}
-
-// Find Middle Node of Linked List
-function findMiddle(head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-  return slow;
-}
-```
-
----
-
-### Binary Search
-Works on sorted collections. Time complexity: $O(\log N)$.
-
-```javascript
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-
-  while (left <= right) {
-    const mid = Math.floor(left + (right - left) / 2);
-
-    if (arr[mid] === target) return mid;
-    if (arr[mid] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-
-  return -1;
-}
-```
-
----
-
-### Sorting Algorithms
-
-#### Merge Sort — $O(N \log N)$ (Divide and Conquer)
-```javascript
-function mergeSort(arr) {
-  if (arr.length <= 1) return arr;
-
-  const mid = Math.floor(arr.length / 2);
-  const left = mergeSort(arr.slice(0, mid));
-  const right = mergeSort(arr.slice(mid));
-
-  return merge(left, right);
-}
-
-function merge(left, right) {
+function subsets(nums) {
   const result = [];
-  let i = 0, j = 0;
-
-  while (i < left.length && j < right.length) {
-    if (left[i] <= right[j]) {
-      result.push(left[i++]);
-    } else {
-      result.push(right[j++]);
+  function backtrack(index, path) {
+    result.push([...path]);
+    for (let i = index; i < nums.length; i++) {
+      path.push(nums[i]);
+      backtrack(i + 1, path);
+      path.pop();
     }
   }
-
-  return [...result, ...left.slice(i), ...right.slice(j)];
-}
-```
-
-#### Quick Sort — Average $O(N \log N)$, Worst $O(N^2)$
-```javascript
-function quickSort(arr) {
-  if (arr.length <= 1) return arr;
-
-  const pivot = arr[arr.length - 1];
-  const left = [];
-  const right = [];
-
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] < pivot) left.push(arr[i]);
-    else right.push(arr[i]);
-  }
-
-  return [...quickSort(left), pivot, ...quickSort(right)];
+  backtrack(0, []);
+  return result;
 }
 ```
 
 ---
 
-## 6. Advanced Algorithmic Techniques
-
-### Recursion & Backtracking
-Recursion solves problems by breaking them into smaller subproblems. Backtracking explores all possibilities and undoes choices that lead to dead ends.
+## 21. Backtracking
+Systematic state-space search pruning dead ends when exploring constraints.
 
 ```javascript
-// Generate all permutations of a string (Backtracking)
-function permute(str, prefix = '') {
-  if (str.length === 0) {
-    console.log(prefix);
-    return;
-  }
-  for (let i = 0; i < str.length; i++) {
-    const remaining = str.slice(0, i) + str.slice(i + 1);
-    permute(remaining, prefix + str[i]);
-  }
-}
-
-// N-Queens problem (Backtracking)
 function solveNQueens(n) {
   const result = [];
   const board = Array.from({ length: n }, () => Array(n).fill('.'));
@@ -1001,30 +576,493 @@ function solveNQueens(n) {
 
 ---
 
-### Dynamic Programming (DP)
-DP solves complex problems by breaking them into overlapping subproblems and storing results to avoid redundant computation.
+## 22. Trees
+Hierarchical data structures formed by connected nodes with parent-child relationships.
 
 ```javascript
-// Fibonacci with Memoization (Top-Down)
-function fib(n, memo = {}) {
-  if (n in memo) return memo[n];
-  if (n <= 1) return n;
-  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
-  return memo[n];
+class TreeNode {
+  constructor(val = 0, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
 
-// 0/1 Knapsack Problem
-function knapsack(weights, values, capacity) {
+function maxDepth(root) {
+  if (!root) return 0;
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+}
+```
+
+---
+
+## 23. Tree Traversals
+Systematic techniques for visiting every node in a tree structure:
+- **DFS**: Preorder (Root-L-R), Inorder (L-Root-R), Postorder (L-R-Root)
+- **BFS**: Level-Order Traversal
+
+```javascript
+// Inorder Traversal (Recursive)
+function inorderTraversal(root, result = []) {
+  if (root) {
+    inorderTraversal(root.left, result);
+    result.push(root.val);
+    inorderTraversal(root.right, result);
+  }
+  return result;
+}
+
+// Level Order Traversal (BFS)
+function levelOrder(root) {
+  const result = [];
+  if (!root) return result;
+  const queue = [root];
+  while (queue.length > 0) {
+    const levelSize = queue.length;
+    const currentLevel = [];
+    for (let i = 0; i < levelSize; i++) {
+      const node = queue.shift();
+      currentLevel.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    result.push(currentLevel);
+  }
+  return result;
+}
+```
+
+---
+
+## 24. Binary Search Tree
+Binary trees maintaining sorted order property where `left.val < root.val < right.val`.
+
+```javascript
+class BST {
+  constructor() { this.root = null; }
+
+  insert(val) {
+    const newNode = new TreeNode(val);
+    if (!this.root) { this.root = newNode; return; }
+    let curr = this.root;
+    while (true) {
+      if (val < curr.val) {
+        if (!curr.left) { curr.left = newNode; return; }
+        curr = curr.left;
+      } else {
+        if (!curr.right) { curr.right = newNode; return; }
+        curr = curr.right;
+      }
+    }
+  }
+}
+```
+
+---
+
+## 25. Heap / Priority Queue
+Complete binary trees optimized for retrieving minimum or maximum keys in $O(1)$ time and modifying in $O(\log N)$ time.
+
+```javascript
+class MinHeap {
+  constructor() { this.heap = []; }
+  getParentIndex(i) { return Math.floor((i - 1) / 2); }
+  getLeftChildIndex(i) { return 2 * i + 1; }
+  getRightChildIndex(i) { return 2 * i + 2; }
+  swap(i1, i2) { [this.heap[i1], this.heap[i2]] = [this.heap[i2], this.heap[i1]]; }
+
+  push(val) {
+    this.heap.push(val);
+    this.heapifyUp();
+  }
+
+  heapifyUp() {
+    let index = this.heap.length - 1;
+    while (index > 0 && this.heap[index] < this.heap[this.getParentIndex(index)]) {
+      const pIdx = this.getParentIndex(index);
+      this.swap(index, pIdx);
+      index = pIdx;
+    }
+  }
+
+  pop() {
+    if (this.heap.length === 0) return null;
+    if (this.heap.length === 1) return this.heap.pop();
+    const item = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown();
+    return item;
+  }
+
+  heapifyDown() {
+    let index = 0;
+    while (this.getLeftChildIndex(index) < this.heap.length) {
+      let smaller = this.getLeftChildIndex(index);
+      const right = this.getRightChildIndex(index);
+      if (right < this.heap.length && this.heap[right] < this.heap[smaller]) {
+        smaller = right;
+      }
+      if (this.heap[index] <= this.heap[smaller]) break;
+      this.swap(index, smaller);
+      index = smaller;
+    }
+  }
+}
+```
+
+---
+
+## 26. Trie
+Prefix tree data structure optimized for string retrieval and matching prefix lookups.
+
+```javascript
+class TrieNode {
+  constructor() {
+    this.children = {};
+    this.isEndOfWord = false;
+  }
+}
+
+class Trie {
+  constructor() { this.root = new TrieNode(); }
+
+  insert(word) {
+    let curr = this.root;
+    for (const char of word) {
+      if (!curr.children[char]) curr.children[char] = new TrieNode();
+      curr = curr.children[char];
+    }
+    curr.isEndOfWord = true;
+  }
+
+  search(word) {
+    let curr = this.root;
+    for (const char of word) {
+      if (!curr.children[char]) return false;
+      curr = curr.children[char];
+    }
+    return curr.isEndOfWord;
+  }
+}
+```
+
+---
+
+## 27. Graph Basics
+Graphs consisting of Vertices connected by Edges (Directed, Undirected, Weighted).
+
+```javascript
+class Graph {
+  constructor() {
+    this.adjacencyList = new Map();
+  }
+
+  addVertex(vertex) {
+    if (!this.adjacencyList.has(vertex)) this.adjacencyList.set(vertex, []);
+  }
+
+  addEdge(v1, v2) {
+    this.addVertex(v1);
+    this.addVertex(v2);
+    this.adjacencyList.get(v1).push(v2);
+    this.adjacencyList.get(v2).push(v1);
+  }
+}
+```
+
+---
+
+## 28. BFS & DFS
+Fundamental graph traversal strategies.
+
+```javascript
+// Graph BFS
+function bfs(graph, start) {
+  const visited = new Set([start]);
+  const queue = [start];
+  while (queue.length > 0) {
+    const node = queue.shift();
+    for (const neighbor of graph.adjacencyList.get(node) || []) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push(neighbor);
+      }
+    }
+  }
+}
+```
+
+---
+
+## 29. Graph Cycle Detection
+Identifying cycles in directed (using recursion stack tracking) and undirected graphs (using parent pointers or Union-Find).
+
+```javascript
+// Undirected graph cycle detection using BFS
+function hasCycleUndirected(graph, numVertices) {
+  const visited = new Set();
+  
+  for (let i = 0; i < numVertices; i++) {
+    if (visited.has(i)) continue;
+    const queue = [[i, -1]]; // [node, parent]
+    visited.add(i);
+
+    while (queue.length > 0) {
+      const [node, parent] = queue.shift();
+      for (const neighbor of graph.adjacencyList.get(node) || []) {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor);
+          queue.push([neighbor, node]);
+        } else if (neighbor !== parent) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+```
+
+---
+
+## 30. Topological Sort
+Linear ordering of vertices in Directed Acyclic Graphs (DAGs) such that for every edge $u \to v$, $u$ comes before $v$ (Kahn's Algorithm / DFS).
+
+```javascript
+function topologicalSort(numNodes, edges) {
+  const inDegree = new Array(numNodes).fill(0);
+  const adj = Array.from({ length: numNodes }, () => []);
+
+  for (const [u, v] of edges) {
+    adj[u].push(v);
+    inDegree[v]++;
+  }
+
+  const queue = [];
+  for (let i = 0; i < numNodes; i++) {
+    if (inDegree[i] === 0) queue.push(i);
+  }
+
+  const order = [];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    order.push(curr);
+    for (const next of adj[curr]) {
+      inDegree[next]--;
+      if (inDegree[next] === 0) queue.push(next);
+    }
+  }
+
+  return order.length === numNodes ? order : []; // Empty if cycle detected
+}
+```
+
+---
+
+## 31. Shortest Path
+Finding shortest paths in graphs:
+- Unweighted graph: BFS
+- Weighted graph (positive edges): Dijkstra's Algorithm
+
+```javascript
+function dijkstra(graph, start) {
+  const distances = {};
+  const pq = new MinHeap(); // Priority queue stores [distance, node]
+  
+  for (const vertex of graph.adjacencyList.keys()) {
+    distances[vertex] = Infinity;
+  }
+  distances[start] = 0;
+  pq.push({ node: start, dist: 0 });
+
+  while (pq.heap.length > 0) {
+    const { node, dist } = pq.pop();
+    if (dist > distances[node]) continue;
+
+    for (const neighbor of graph.adjacencyList.get(node) || []) {
+      const newDist = distances[node] + neighbor.weight;
+      if (newDist < distances[neighbor.node]) {
+        distances[neighbor.node] = newDist;
+        pq.push({ node: neighbor.node, dist: newDist });
+      }
+    }
+  }
+  return distances;
+}
+```
+
+---
+
+## 32. MST
+Minimum Spanning Trees connect all graph vertices together with minimum edge weight sum (Kruskal's Algorithm, Prim's Algorithm).
+
+```javascript
+function kruskal(numNodes, edges) {
+  // edges: [[u, v, weight]]
+  edges.sort((a, b) => a[2] - b[2]);
+  const dsu = new UnionFind(numNodes);
+  let mstWeight = 0, count = 0;
+
+  for (const [u, v, w] of edges) {
+    if (dsu.union(u, v)) {
+      mstWeight += w;
+      count++;
+      if (count === numNodes - 1) break;
+    }
+  }
+  return mstWeight;
+}
+```
+
+---
+
+## 33. Union Find
+Disjoint Set Union (DSU) tracking partitioned sets with Path Compression and Union by Rank.
+
+```javascript
+class UnionFind {
+  constructor(size) {
+    this.parent = Array.from({ length: size }, (_, i) => i);
+    this.rank = new Array(size).fill(0);
+  }
+
+  find(i) {
+    if (this.parent[i] === i) return i;
+    this.parent[i] = this.find(this.parent[i]); // Path compression
+    return this.parent[i];
+  }
+
+  union(i, j) {
+    const rootI = this.find(i);
+    const rootJ = this.find(j);
+    if (rootI !== rootJ) {
+      if (this.rank[rootI] < this.rank[rootJ]) this.parent[rootI] = rootJ;
+      else if (this.rank[rootI] > this.rank[rootJ]) this.parent[rootJ] = rootI;
+      else {
+        this.parent[rootJ] = rootI;
+        this.rank[rootI]++;
+      }
+      return true;
+    }
+    return false;
+  }
+}
+```
+
+---
+
+## 34. Greedy
+Making locally optimal choices at each stage to produce globally optimal solutions.
+
+```javascript
+function coinChangeGreedy(coins, amount) {
+  coins.sort((a, b) => b - a);
+  let count = 0, remaining = amount;
+  for (const coin of coins) {
+    if (remaining === 0) break;
+    count += Math.floor(remaining / coin);
+    remaining %= coin;
+  }
+  return remaining === 0 ? count : -1;
+}
+```
+
+---
+
+## 35. Intervals
+Problems involving sorting, merging, and determining overlap between bounded intervals.
+
+```javascript
+function mergeIntervals(intervals) {
+  if (!intervals.length) return [];
+  intervals.sort((a, b) => a[0] - b[0]);
+  const result = [intervals[0]];
+
+  for (let i = 1; i < intervals.length; i++) {
+    const last = result[result.length - 1];
+    const curr = intervals[i];
+    if (curr[0] <= last[1]) {
+      last[1] = Math.max(last[1], curr[1]);
+    } else {
+      result.push(curr);
+    }
+  }
+  return result;
+}
+```
+
+---
+
+## 36. Dynamic Programming Basics
+Solving optimization problems by combining solutions to overlapping subproblems (Memoization & Tabulation).
+
+```javascript
+// Climbing Stairs (Tabulation)
+function climbStairs(n) {
+  if (n <= 2) return n;
+  let prev1 = 1, prev2 = 2;
+  for (let i = 3; i <= n; i++) {
+    const curr = prev1 + prev2;
+    prev1 = prev2;
+    prev2 = curr;
+  }
+  return prev2;
+}
+```
+
+---
+
+## 37. 1D DP
+Linear Dynamic Programming state formulations ($DP[i]$ depending on previous indices).
+
+```javascript
+// Coin Change (1D DP)
+function coinChange(coins, amount) {
+  const dp = new Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+  for (let i = 1; i <= amount; i++) {
+    for (const coin of coins) {
+      if (i - coin >= 0) {
+        dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+      }
+    }
+  }
+  return dp[amount] === Infinity ? -1 : dp[amount];
+}
+```
+
+---
+
+## 38. 2D DP
+Grid or double-sequence state formulations ($DP[i][j]$).
+
+```javascript
+// Unique Paths in Grid
+function uniquePaths(m, n) {
+  const dp = Array.from({ length: m }, () => Array(n).fill(1));
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    }
+  }
+  return dp[m - 1][n - 1];
+}
+```
+
+---
+
+## 39. Knapsack DP
+0/1, Unbounded, and Subset-Sum DP problems.
+
+```javascript
+function knapsack01(weights, values, capacity) {
   const n = weights.length;
   const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
 
   for (let i = 1; i <= n; i++) {
     for (let w = 0; w <= capacity; w++) {
       if (weights[i - 1] <= w) {
-        dp[i][w] = Math.max(
-          dp[i - 1][w],
-          dp[i - 1][w - weights[i - 1]] + values[i - 1]
-        );
+        dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
       } else {
         dp[i][w] = dp[i - 1][w];
       }
@@ -1032,11 +1070,17 @@ function knapsack(weights, values, capacity) {
   }
   return dp[n][capacity];
 }
+```
 
-// Longest Common Subsequence (LCS)
+---
+
+## 40. DP + Strings
+Dynamic programming applied to string matching, editing, and palindrome partitioning.
+
+```javascript
+// Longest Common Subsequence
 function longestCommonSubsequence(text1, text2) {
-  const m = text1.length;
-  const n = text2.length;
+  const m = text1.length, n = text2.length;
   const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
 
   for (let i = 1; i <= m; i++) {
@@ -1054,105 +1098,130 @@ function longestCommonSubsequence(text1, text2) {
 
 ---
 
-### Greedy Algorithms
-Greedy algorithms make the locally optimal choice at each step, hoping to find a global optimum.
+## 41. Bit Manipulation
+Bitwise operations (`AND`, `OR`, `XOR`, `NOT`, bit shifts) for fast binary processing.
 
 ```javascript
-// Activity Selection Problem
-function activitySelection(start, end) {
-  const activities = start.map((s, i) => [s, end[i]]);
-  activities.sort((a, b) => a[1] - b[1]);
-
-  const selected = [activities[0]];
-  let lastEnd = activities[0][1];
-
-  for (let i = 1; i < activities.length; i++) {
-    if (activities[i][0] >= lastEnd) {
-      selected.push(activities[i]);
-      lastEnd = activities[i][1];
-    }
+// Single Number (XOR Property)
+function singleNumber(nums) {
+  let result = 0;
+  for (const num of nums) {
+    result ^= num;
   }
-  return selected;
-}
-
-// Coin Change (Greedy - works with canonical coin systems)
-function coinChangeGreedy(coins, amount) {
-  coins.sort((a, b) => b - a);
-  const result = [];
-  let remaining = amount;
-
-  for (const coin of coins) {
-    while (remaining >= coin) {
-      result.push(coin);
-      remaining -= coin;
-    }
-  }
-  return remaining === 0 ? result : null;
-}
-
-// Fractional Knapsack
-function fractionalKnapsack(items, capacity) {
-  // items: [{weight, value}]
-  items.sort((a, b) => (b.value / b.weight) - (a.value / a.weight));
-
-  let totalValue = 0;
-  for (const item of items) {
-    if (capacity <= 0) break;
-    const take = Math.min(item.weight, capacity);
-    totalValue += (item.value / item.weight) * take;
-    capacity -= take;
-  }
-  return totalValue;
+  return result;
 }
 ```
 
 ---
 
-### Graph Algorithms (BFS, DFS, Dijkstra)
+## 42. Advanced Data Structures
+Tree-based range query structures: Segment Trees and Binary Indexed Trees (Fenwick Trees).
 
 ```javascript
-// Dijkstra's Shortest Path Algorithm
-class WeightedGraph {
-  constructor() {
-    this.adjacencyList = new Map();
+class NumArraySegmentTree {
+  constructor(nums) {
+    this.n = nums.length;
+    this.tree = new Array(2 * this.n).fill(0);
+    for (let i = 0; i < this.n; i++) this.tree[this.n + i] = nums[i];
+    for (let i = this.n - 1; i > 0; i--) this.tree[i] = this.tree[2 * i] + this.tree[2 * i + 1];
   }
 
-  addVertex(vertex) {
-    if (!this.adjacencyList.has(vertex)) {
-      this.adjacencyList.set(vertex, []);
+  update(index, val) {
+    let pos = index + this.n;
+    this.tree[pos] = val;
+    while (pos > 1) {
+      pos = Math.floor(pos / 2);
+      this.tree[pos] = this.tree[2 * pos] + this.tree[2 * pos + 1];
     }
   }
 
-  addEdge(v1, v2, weight) {
-    this.adjacencyList.get(v1).push({ node: v2, weight });
-    this.adjacencyList.get(v2).push({ node: v1, weight });
-  }
-
-  dijkstra(start) {
-    const distances = {};
-    const priorityQueue = new PriorityQueue((a, b) => a.priority - b.priority);
-    const previous = {};
-
-    for (const vertex of this.adjacencyList.keys()) {
-      distances[vertex] = Infinity;
-      previous[vertex] = null;
+  sumRange(left, right) {
+    let l = left + this.n, r = right + this.n;
+    let sum = 0;
+    while (l <= r) {
+      if (l % 2 === 1) sum += this.tree[l++];
+      if (r % 2 === 0) sum += this.tree[r--];
+      l = Math.floor(l / 2);
+      r = Math.floor(r / 2);
     }
-    distances[start] = 0;
-    priorityQueue.push({ vertex: start, priority: 0 });
-
-    while (!priorityQueue.isEmpty()) {
-      const { vertex: current } = priorityQueue.pop();
-
-      for (const neighbor of this.adjacencyList.get(current)) {
-        const distance = distances[current] + neighbor.weight;
-        if (distance < distances[neighbor.node]) {
-          distances[neighbor.node] = distance;
-          previous[neighbor.node] = current;
-          priorityQueue.push({ vertex: neighbor.node, priority: distance });
-        }
-      }
-    }
-    return { distances, previous };
+    return sum;
   }
 }
 ```
+
+---
+
+## 43. Advanced Graphs
+Shortest path algorithms handling negative edge weights and all-pairs paths: Bellman-Ford and Floyd-Warshall.
+
+```javascript
+// Bellman-Ford Algorithm
+function bellmanFord(numNodes, edges, start) {
+  const dist = new Array(numNodes).fill(Infinity);
+  dist[start] = 0;
+
+  for (let i = 0; i < numNodes - 1; i++) {
+    for (const [u, v, w] of edges) {
+      if (dist[u] !== Infinity && dist[u] + w < dist[v]) {
+        dist[v] = dist[u] + w;
+      }
+    }
+  }
+  return dist;
+}
+```
+
+---
+
+## 44. Advanced Algorithms
+Pattern matching algorithms for string search in $O(N + M)$ time (Knuth-Morris-Pratt and Rabin-Karp).
+
+```javascript
+// KMP Prefix Table Helper
+function buildLPSArray(pattern) {
+  const lps = new Array(pattern.length).fill(0);
+  let len = 0, i = 1;
+  while (i < pattern.length) {
+    if (pattern[i] === pattern[len]) {
+      len++;
+      lps[i] = len;
+      i++;
+    } else {
+      if (len !== 0) len = lps[len - 1];
+      else { lps[i] = 0; i++; }
+    }
+  }
+  return lps;
+}
+```
+
+---
+
+## 45. Interview Patterns
+Recognizing top algorithmic patterns quickly in technical interviews:
+- Two Pointers
+- Fast & Slow Pointers
+- Sliding Window
+- Monotonic Stack
+- Top K Elements
+- Overlapping Intervals
+
+---
+
+## 46. Mixed Problems
+Solving complex LeetCode Medium/Hard challenges that combine multiple DSA techniques simultaneously.
+
+---
+
+## 47. Mock Interviews
+Strategies for timed 45–60 minute technical interviews:
+1. Clarify edge cases and constraints
+2. Explain brute-force before optimizing
+3. Trace sample inputs dry-run style
+4. Write clean, bug-free production code
+5. Analyze time and space complexity
+
+---
+
+## 48. FAANG/MAANG Preparation
+High-frequency company-style problems, code refinement, system performance considerations, and edge case hardening.
